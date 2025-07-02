@@ -13,7 +13,6 @@ interface SelectTypeProps {
     type: string;
 }
 
-
 const types = [
   { value: "All", label: "All" },
   { value: "normal", label: "Normal" },

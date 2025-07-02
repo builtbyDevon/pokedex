@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import NextTopLoader from 'nextjs-toploader';
 import PokemonSearch from "@/components/PokemonSearch";
-import SelectType from "@/components/SelectType";
 import "./globals.css";
-import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

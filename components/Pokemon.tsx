@@ -37,7 +37,7 @@ export default async function Pokemon(props: PokemonProps) {
 
     return (
             <div className="text-left">
-                <div style={gradientStyle} className="rounded-4xl">{image !== null ? <Image width="238" height="238" src={image} alt={name} /> : <div>No image found</div>}</div>
+                <div style={gradientStyle} className="rounded-4xl">{image !== null ? <Image quality="100" width="238" height="238" src={image} alt={name} /> : <div>No image found</div>}</div>
                 <p className="first-letter:uppercase py-2">{name}</p>
                 <div className="flex gap-2">{typesCombined.map((type, index )=> {
                    return (<Types key={index} type={type} />);
