@@ -38,7 +38,7 @@ export default async function PostList({ pageId }: PostList) {
     
     return (
     <main>
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap gap-5 justify-center mt-4 animate-fade-in">
         {pokemon?.length === 0 && <p>No Pokemon found</p>}
         {pokemon?.map((poke: Pokemon, index: number) => {
             return (<Link href={`/pokemon/${poke.name}`} key={index}><Pokemon name={poke.name} url={poke.url} /></Link>)

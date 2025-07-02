@@ -13,6 +13,7 @@
     "@types/react-window": "^1.8.8",
     "next": "15.3.4",
     "next-scroll-restorer": "^0.10.2",
+    "nextjs-toploader": "^3.8.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-infinite-scroll-component": "^6.1.0",
