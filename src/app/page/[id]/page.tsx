@@ -1,14 +1,14 @@
 import PostList from "@/components/PostList";
 import PostListType from "@/components/PostListType";
+import SelectType from "@/components/SelectType";
 
 interface PageProps {
     params: Promise<{ id: string }>; // Changed to string since URL params are strings
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-// Force dynamic rendering
-export const revalidate = 3600; // Revalidate every hour
 
+export const revalidate = 3600;
 
 export default async function Page({ params, searchParams }: PageProps) {
     const { id } = await params;
@@ -19,6 +19,9 @@ export default async function Page({ params, searchParams }: PageProps) {
     console.log('Type:', type);
 
     return (
-        type !== undefined ? <PostListType pageId={parseInt(id)} type={type} /> : <PostList pageId={parseInt(id)} />
+        <>
+            <SelectType type={type} />
+            {type !== undefined ? <PostListType pageId={parseInt(id)} type={type} /> : <PostList pageId={parseInt(id)} />}
+        </>
     );
 }
