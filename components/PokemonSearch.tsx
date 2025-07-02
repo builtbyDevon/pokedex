@@ -23,8 +23,9 @@ export default function PokemonSearch() {
     useEffect(() => {
         async function fetchAllPokemon() {
             try {
-                console.log('Fetching Pokemon list...');
-                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000');
+                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000', {
+                    cache: 'force-cache' // ✅ Browser cache - works in client components
+                });
                 const data = await response.json();
                 
                 // Extract ID from URL and create Pokemon list
@@ -39,7 +40,6 @@ export default function PokemonSearch() {
                 
                 setPokemon(pokemonList);
                 setFilteredPokemon(pokemonList);
-                console.log(`Loaded ${pokemonList.length} Pokemon for search`);
             } catch (error) {
                 console.error('Failed to fetch Pokemon:', error);
             } finally {

@@ -1,34 +1,24 @@
 import PostList from "@/components/PostList";
+import PostListType from "@/components/PostListType";
 
 interface PageProps {
     params: Promise<{ id: string }>; // Changed to string since URL params are strings
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
 
-// Add this function to pre-generate pagination pages
-export async function generateStaticParams(): Promise<
-    { params: { id: string } }[]
-> {
-    // Calculate how many pages we need
-    // Total Pokemon: ~1300, 15 per page = ~87 pages
-    const totalPages = 87;
-    
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push({
-            params: { id: i.toString() }, // Convert to string since URL params are strings
-        });
-    }
-    
-    return pages;
-}
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
     const { id } = await params;
+    const search = await searchParams;
+
+    const type = search.type as string;
+
+    console.log('Type:', type);
 
     return (
-        <PostList pageId={parseInt(id)} />
+        type !== undefined ? <PostListType pageId={parseInt(id)} type={type} /> : <PostList pageId={parseInt(id)} />
     );
 }

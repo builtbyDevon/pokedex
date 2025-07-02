@@ -16,17 +16,13 @@ interface PokemonType {
 }
 
 export default async function Pokemon(props: PokemonProps) {
-    
-    // async function getPokemon() {
-    //     console.log(props, ' props');
-    // }
+
 
     const getPokemonResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.name}/`);
     const getPokemon = await getPokemonResp.json();
 
     const name = getPokemon.name;
     const image = getPokemon.sprites.other['official-artwork'].front_default;
-    console.log(image, ' image')
     const types = getPokemon.types;
 
     const typesCombined: string[] = [];

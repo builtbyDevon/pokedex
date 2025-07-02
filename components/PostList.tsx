@@ -14,7 +14,6 @@ interface Pokemon {
 export default async function PostList({ pageId }: PostList) {
     const amount = 15;
     const offsetAmount = (pageId - 1) * amount;
-    console.log(offsetAmount, ' offsetAmount')
 
     const getPokemon = async () => {
 
