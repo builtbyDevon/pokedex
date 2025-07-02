@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 interface PaginationProps {
     pageId: number;
@@ -17,7 +18,7 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
             maxPages = Math.ceil(pages / 15) + 1;
         }
         const gap = 3;
-        const buttonStyling = "p-2 mx-1 rounded-lg border border-neutral-100/20"
+        const buttonStyling = "p-2 mx-1 rounded-lg"
         const buttonDisabled = "opacity-40 pointer-events-none"
         const [loading, setLoading] = useState(false);
         const loadingCSS = "pointer-events-none opacity-60"
@@ -39,7 +40,7 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
             for (let step = 0; step < pageAmount; step++) {
                 const calculation = pageId - 1 - step;
                 if (calculation > 0) {
-                    BackButtonsArray.push(<Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${calculation}${type ? `?type=${type}` : ''}`} key={step}>{calculation}</Link>);
+                    BackButtonsArray.push(<Button key={step} asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${calculation}${type ? `?type=${type}` : ''}`} >{calculation}</Link></Button>);
                 }
                 // Runs 5 times, with values of step 0 through 4.
               }
@@ -51,7 +52,7 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
             for (let step = 0; step < pageAmount; step++) {
                 const calculation = pageId + 1 + step;
                 if (pageId + step + 1 < maxPages) {
-                    ForwardButtonsArray.push(<Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${calculation}${type ? `?type=${type}` : ''}`} key={step}>{calculation}</Link>);
+                    ForwardButtonsArray.push(<Button key={step} asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${calculation}${type ? `?type=${type}` : ''}`} >{calculation}</Link></Button>);
                 }
                 // Runs 5 times, with values of step 0 through 4.
               }
@@ -63,20 +64,20 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
 
 
         return (
-        <div className={`flex justify-center mt-4 gap-${gap}`}> 
-            {pageId !== 1 && <Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/1${type ? `?type=${type}` : ''}`}>First</Link>}
-            <Link onClick={buttonClick} className={`${buttonStyling}  ${pageId - 1 > 0 ? "" : buttonDisabled} ${loading ? loadingCSS : ""}`} href={pageId - 1 > 0 ? `/page/${pageId - 1}${type ? `?type=${type}` : ''}` : ''}>Back</Link>
+        <div className={`flex justify-center flex-wrap mt-4 gap-${gap}`}> 
+            {pageId !== 1 && <Button asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/1${type ? `?type=${type}` : ''}`}>First</Link></Button>}
+            <Button asChild><Link onClick={buttonClick} className={`${buttonStyling}  ${pageId - 1 > 0 ? "" : buttonDisabled} ${loading ? loadingCSS : ""}`} href={pageId - 1 > 0 ? `/page/${pageId - 1}${type ? `?type=${type}` : ''}` : ''}>Back</Link></Button>
             <div className={`flex gap-${gap} flex-row-reverse`}>
                 {BackButtons.map((backButton) => {
                     return (backButton)
                 })}
             </div>
-            <div className={buttonStyling}><p className="text-green-500">{pageId}</p></div>
+            <Button asChild><div className={buttonStyling}><p className="text-green-500">{pageId}</p></div></Button>
             {ForwardButtons.map((forwardButton) => {
                     return (forwardButton)
             })}
-            <Link onClick={buttonClick} className={`${buttonStyling} ${pageId + 1 < maxPages ? "" : buttonDisabled} ${loading ? loadingCSS : ""}`} href={pageId + 1 < maxPages ? `/page/${pageId + 1}${type ? `?type=${type}` : ''}` : ""}>Next</Link>
-            {pageId !== maxPages - 1 && <Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${maxPages - 1}${type ? `?type=${type}` : ''}`}>Last</Link>}
+            <Button asChild><Link onClick={buttonClick} className={`${buttonStyling} ${pageId + 1 < maxPages ? "" : buttonDisabled} ${loading ? loadingCSS : ""}`} href={pageId + 1 < maxPages ? `/page/${pageId + 1}${type ? `?type=${type}` : ''}` : ""}>Next</Link></Button>
+            {pageId !== maxPages - 1 && <Button asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${maxPages - 1}${type ? `?type=${type}` : ''}`}>Last</Link></Button>}
         </div>
     );
 }
