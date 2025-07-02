@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Input } from "@/components/ui/input"
 
 interface Pokemon {
     name: string;
@@ -112,14 +113,14 @@ export default function PokemonSearch() {
     }
 
     return (
-        <div className="w-full relative max-w-md mx-auto">
+        <div className="w-full relative max-w-md">
             <div className="relative">
-                <input
+                <Input 
                     type="text"
                     placeholder="Search Pokemon..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg"
                 />
                 {searchTerm && (
                     <button

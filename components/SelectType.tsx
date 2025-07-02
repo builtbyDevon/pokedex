@@ -40,8 +40,8 @@ export default function SelectType(type: SelectTypeProps) {
     console.log('type ', type);
   return (
     <div>
-      <label htmlFor="type-select" className="block mb-2">
-        Choose a type:
+      <label htmlFor="type-select" className="inline-block mb-2">
+        Filter:
       </label>
       <Select
         value={type.type}
