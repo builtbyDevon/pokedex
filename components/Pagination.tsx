@@ -10,18 +10,15 @@ interface PaginationProps {
 }
 
 export default function Pagination({ pageId, pages, type }: PaginationProps) {
-        console.log('pokemon page length ? ', pages)
-        console.log("type is ", type);
         const pageAmount = 4;
 
         let maxPages = 87;
         if (pages !== undefined) {
             maxPages = Math.ceil(pages / 15) + 1;
         }
-        console.log('maxPages ', maxPages) 
         const gap = 3;
         const buttonStyling = "p-2 mx-1 rounded-lg border border-neutral-100/20"
-        const buttonDisabled = "opacity-40 cursor-not-allowed"
+        const buttonDisabled = "opacity-40 pointer-events-none"
         const [loading, setLoading] = useState(false);
         const loadingCSS = "pointer-events-none opacity-60"
 

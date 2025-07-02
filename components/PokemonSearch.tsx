@@ -101,6 +101,10 @@ export default function PokemonSearch() {
         }
     }, [filteredPokemon, loadSprite]);
 
+    function closeMenu() {
+        setSearchTerm("");
+    }
+
     if (loading) {
         return (
             <div className="w-full max-w-md mx-auto">
@@ -133,19 +137,19 @@ export default function PokemonSearch() {
             </div>
 
             {searchTerm && (
-                <div className="mt-2 max-h-96 z-50 overflow-y-auto border border-gray-200 rounded-lg bg-white shadow-lg absolute w-full">
+                <div className="mt-2 max-h-96 z-50 overflow-y-auto dark:bg-primary border border-bg-border rounded-lg bg-white shadow-lg absolute w-full">
                     {filteredPokemon.length === 0 ? (
                         <div className="p-4 text-center text-gray-500">
                             No Pokemon found for &quot;{searchTerm}&quot;
                         </div>
                     ) : (
                         <>
-                            <div className="p-2 text-sm text-gray-500 border-b border-gray-100">
+                            <div className="p-2 text-sm text-base border-b border-bg-border">
                                 {filteredPokemon.length} result{filteredPokemon.length !== 1 ? 's' : ''}
                             </div>
                             {filteredPokemon.slice(0, 20).map((pokemon) => (
-                                <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
-                                    <div className="flex items-center p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 cursor-pointer transition-colors">
+                                <Link onClick={closeMenu} key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
+                                    <div className="flex items-center p-3 hover:bg-[var(--primary-hover)]  border-b border-bg-border last:border-b-0 cursor-pointer transition-colors">
                                         <div className="w-8 h-8 mr-3 flex items-center justify-center">
                                             {pokemon.sprite ? (
                                                 <Image
@@ -161,16 +165,16 @@ export default function PokemonSearch() {
                                                 </div>
                                             ) : (
                                                 <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
-                                                    <span className="text-xs text-gray-500">#{pokemon.id}</span>
+                                                    <span className="text-xs text-base">#{pokemon.id}</span>
                                                 </div>
                                             )}
                                         </div>
-                                        <span className="capitalize font-medium text-gray-800">{pokemon.name}</span>
+                                        <span className="capitalize font-medium text-base">{pokemon.name}</span>
                                     </div>
                                 </Link>
                             ))}
                             {filteredPokemon.length > 20 && (
-                                <div className="p-3 text-center text-sm text-gray-500 border-t border-gray-100">
+                                <div className="p-3 text-center text-sm text-base border-t border-gray-100">
                                     Showing first 20 results. Type more to narrow down.
                                 </div>
                             )}

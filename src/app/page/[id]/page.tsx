@@ -16,8 +16,6 @@ export default async function Page({ params, searchParams }: PageProps) {
 
     const type = search.type as string;
 
-    console.log('Type:', type);
-
     return (
         <>
             <SelectType type={type} />
