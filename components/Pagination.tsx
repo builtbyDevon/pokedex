@@ -12,14 +12,14 @@ interface PaginationProps {
 }
 
 export default function Pagination({ pageId, pages, type }: PaginationProps) {
-        const pageAmount = 3;
+        const pageAmount = 4;
 
         let maxPages = 87;
         if (pages !== undefined) {
             maxPages = Math.ceil(pages / 15) + 1;
         }
         const gap = 3;
-        const buttonStyling = "p-2 mx-1 rounded-lg"
+        const buttonStyling = "p-2 mx-1 rounded-lg my-1"
         const [loading, setLoading] = useState(false);
         const loadingCSS = "pointer-events-none opacity-60"
 
@@ -69,7 +69,7 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
         <div className={`flex justify-center items-end flex-wrap mt-4 gap-${gap}`}> 
             {pageId - 1 > 0 ?  <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={pageId - 1 > 0 ? `/page/${pageId - 1}${type ? `?type=${type}` : ''}` : ''}> <ChevronLeftIcon /></Link></Button> : ""}
             {pageId !== 1 && (pageId - pageAmount) >= 2 && <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/1${type ? `?type=${type}` : ''}`}>1</Link></Button>}
-            {pageId !== 1 && (pageId - pageAmount) >= 2 &&  <div className="mx-2 opacity-80">...</div>}
+            {pageId !== 1 && (pageId - pageAmount) >= 2 &&  <div className="mx-2 opacity-80 mb-2">...</div>}
             <div className={`flex gap-${gap} flex-row-reverse`}>
                 {BackButtons.map((backButton) => {
                     return (backButton)
@@ -79,7 +79,7 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
             {ForwardButtons.map((forwardButton) => {
                     return (forwardButton)
             })}
-            {pageId !== maxPages - 1 && pageId + pageAmount < maxPages - 1 && <div className="mx-2 opacity-80">...</div>}
+            {pageId !== maxPages - 1 && pageId + pageAmount < maxPages - 1 && <div className="mx-2 opacity-80 mb-2">...</div>}
             {pageId !== maxPages - 1 && pageId + pageAmount < maxPages - 1 && <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/${maxPages - 1}${type ? `?type=${type}` : ''}`}>{maxPages - 1}</Link></Button>}
             {pageId + 1 < maxPages && <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={pageId + 1 < maxPages ? `/page/${pageId + 1}${type ? `?type=${type}` : ''}` : ""}> <ChevronRightIcon /></Link></Button>}
         </div>
