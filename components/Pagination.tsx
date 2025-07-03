@@ -19,7 +19,6 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
         }
         const gap = 3;
         const buttonStyling = "p-2 mx-1 rounded-lg"
-        const buttonDisabled = "opacity-40 pointer-events-none"
         const [loading, setLoading] = useState(false);
         const loadingCSS = "pointer-events-none opacity-60"
 
@@ -33,6 +32,8 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
                     setLoading(false);
                 }
         }
+
+        console.log('page d is ', (pageId - pageAmount));
 
 
         function GenerateBackButtons () {
@@ -65,7 +66,7 @@ export default function Pagination({ pageId, pages, type }: PaginationProps) {
 
         return (
         <div className={`flex justify-center flex-wrap mt-4 gap-${gap}`}> 
-            {pageId !== 1 && <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/1${type ? `?type=${type}` : ''}`}>First</Link></Button>}
+            {pageId !== 1 && (pageId - pageAmount) >= 2 && <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/1${type ? `?type=${type}` : ''}`}>First</Link></Button>}
             {pageId - 1 > 0 ?  <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={pageId - 1 > 0 ? `/page/${pageId - 1}${type ? `?type=${type}` : ''}` : ''}>Back</Link></Button> : ""}
             <div className={`flex gap-${gap} flex-row-reverse`}>
                 {BackButtons.map((backButton) => {
