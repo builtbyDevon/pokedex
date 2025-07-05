@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
+import { Montserrat, Press_Start_2P } from "next/font/google";
 import NextTopLoader from 'nextjs-toploader';
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/Header";
 import "./globals.css";
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const pressStart2P = Press_Start_2P({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-press-start-2p',
+  display: 'swap',
+});
 
 
 export const metadata: Metadata = {
@@ -16,10 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${pressStart2P.variable}`}>
       <head />
-      <body>
-        <NextTopLoader />
+      <body className={montserrat.className}>
+        <NextTopLoader color="#EE1515" showSpinner={false} />
         <ThemeProvider
             attribute="class"
             defaultTheme="system"

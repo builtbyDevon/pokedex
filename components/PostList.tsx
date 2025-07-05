@@ -12,17 +12,25 @@ interface Pokemon {
 }
 
 export default async function PostList({ pageId }: PostList) {
-    const amount = 15;
+    const amount = 25;
     const offsetAmount = (pageId - 1) * amount;
 
     const getPokemon = async () => {
 
         try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=15&offset=${offsetAmount}`, {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${amount}&offset=${offsetAmount}`, {
                 next: { revalidate: 3600 } // Cache for 1 hour
             });
             const data = await response.json();
-            return data.results;
+            const count = await fetch (`https://pokeapi.co/api/v2/pokemon?limit=1`, {
+                next: { revalidate: 3600 } // Cache for 1 hour
+            });
+            const countData = await count.json()
+
+            const totalCount = countData.count;
+            console.log('total Count ', totalCount);
+            const fetchedData = {returnedPokemon: data.results, totalCount: totalCount}
+            return fetchedData;
         }
         catch {
             console.log("error occured");
@@ -34,16 +42,17 @@ export default async function PostList({ pageId }: PostList) {
     const pokemon = await getPokemon();
 
 
-    
     return (
     <main>
-    <div className="flex flex-wrap gap-5 justify-center mt-4 animate-fade-in">
-        {pokemon?.length === 0 && <p>No Pokemon found</p>}
-        {pokemon?.map((poke: Pokemon, index: number) => {
+        {/* {console.log('hedoo, ', pokemon?.totalCount )} */}
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 animate-fade-in max-w-[1300px] mx-auto">
+        {pokemon?.returnedPokemon?.length === 0 && <p>No Pokemon found</p>}
+        {pokemon?.returnedPokemon?.map((poke: Pokemon, index: number) => {
             return (<Link href={`/pokemon/${poke.name}`} key={index}><Pokemon name={poke.name} url={poke.url} /></Link>)
         })}
     </div>
-        <Pagination pageId={pageId} />
+        <Pagination pageId={pageId} pages={pokemon?.totalCount} amount={amount} />
     </main>
     )
 }

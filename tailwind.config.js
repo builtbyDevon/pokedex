@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        'press-start-2p': ['var(--font-press-start-2p)', 'monospace'],
+      },
       colors: {
         primary: "var(--primary)",
         "primary-foreground": "var(--primary-foreground)",

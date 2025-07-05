@@ -158,6 +158,36 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.font-press-start-2p {
+  font-family: var(--font-press-start-2p);
+}
+@keyframes gradient {
+  0% {
+      background-position: 0% 0%;
+  }
+  25% {
+      background-position: 100% 0%;
+  }
+  50% {
+      background-position: 100% 100%;
+  }
+  75% {
+      background-position: 0% 100%;
+  }
+  100% {
+      background-position: 0% 0%;
+  }
+}
+
+@keyframes spin-gradient {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -166,3 +196,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Pokemon gradient opacity variables for light/dark modes */
+:root {
+  --pokemon-gradient-opacity-1: .8;
+  --pokemon-gradient-opacity-2: 0.4;
+  --pokemon-hover-opacity-1: .9;
+  --pokemon-hover-opacity-2: 0.6;
+}
+
+.dark {
+  --pokemon-gradient-opacity-1: 0.7;
+  --pokemon-gradient-opacity-2: 0.15;
+  --pokemon-hover-opacity-1: 0.9;
+  --pokemon-hover-opacity-2: 0.2;
+}
+

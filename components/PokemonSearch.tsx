@@ -109,7 +109,7 @@ export default function PokemonSearch() {
         return (
             <div className="w-full max-w-md mx-auto">
                 <div className="text-center py-4">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-500 mx-auto"></div>
                     <p className="text-gray-600 mt-2">Loading Pokemon database...</p>
                 </div>
             </div>
@@ -150,18 +150,18 @@ export default function PokemonSearch() {
                             {filteredPokemon.slice(0, 20).map((pokemon) => (
                                 <Link onClick={closeMenu} key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
                                     <div className="flex items-center p-3 hover:bg-[var(--primary-hover)]  border-b border-bg-border last:border-b-0 cursor-pointer transition-colors">
-                                        <div className="w-8 h-8 mr-3 flex items-center justify-center">
+                                        <div className="w-[48] h-[48] mr-1 flex items-center justify-center">
                                             {pokemon.sprite ? (
                                                 <Image
                                                     src={pokemon.sprite}
                                                     alt={pokemon.name}
-                                                    width={32}
-                                                    height={32}
+                                                    width={48}
+                                                    height={48}
                                                     className="rounded"
                                                 />
                                             ) : loadingSprites.has(pokemon.name) ? (
                                                 <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
-                                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-red-500"></div>
                                                 </div>
                                             ) : (
                                                 <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">

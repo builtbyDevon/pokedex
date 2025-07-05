@@ -15,7 +15,7 @@ interface Pokemon {
 }
 
 export default async function PostListType({ pageId, type }: PostListType) {
-    const amount = 15;
+    const amount = 25;
     const offsetAmount = (pageId - 1) * amount;
 
     const getPokemon = async () => {
@@ -42,13 +42,13 @@ export default async function PostListType({ pageId, type }: PostListType) {
     
     return (
     <main>
-    <div className="flex flex-wrap gap-5 justify-center mt-4 animate-fade-in">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 animate-fade-in max-w-[1300px] mx-auto">
         {pokemon?.length === 0 && <p>No Pokemon found</p>}
         {pokemon?.pokemon?.map((poke: Pokemon, index: number) => {
             return (<Link href={`/pokemon/${poke.pokemon.name}`} key={index}><Pokemon name={poke.pokemon.name} url={poke.pokemon.url} /></Link>)
         })}
     </div>
-        <Pagination pageId={pageId} type={type} pages={pokemon?.length} />
+        <Pagination pageId={pageId} type={type} pages={pokemon?.length} amount={amount} />
     </main>
     )
 }

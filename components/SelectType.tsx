@@ -8,6 +8,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"; // Adjust the import path if needed
+import Types from "@/components/Types";
 
 interface SelectTypeProps {
     type: string;
@@ -39,7 +40,7 @@ export default function SelectType(type: SelectTypeProps) {
   const router = useRouter();
     console.log('type ', type);
   return (
-    <div>
+    <div className="max-w-[1300px] mx-auto">
       <label htmlFor="type-select" className="inline-block mb-2">
         Filter:
       </label>
@@ -55,7 +56,16 @@ export default function SelectType(type: SelectTypeProps) {
         <SelectContent>
           {types.map((type) => (
             <SelectItem key={type.value} value={type.value}>
-              {type.label}
+              {type.value === "All" ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-4 h-4 bg-gray-400 rounded-full"></span>
+                  {type.label}
+                </span>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Types type={type.value} />
+                </div>
+              )}
             </SelectItem>
           ))}
         </SelectContent>

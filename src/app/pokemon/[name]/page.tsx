@@ -194,15 +194,15 @@ export default async function Page({params}: PageProps) {
                 <Image alt={pokemonDetails.name} width={238} height={238} quality={100} src={pokemonDetails.image} className="mx-auto mb-6" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-md mx-auto mb-8">
-                    <div className="bg-gray-100 p-4 rounded-lg">
+                    <div className="bg-background border border-input p-4 rounded-lg">
                         <p className="font-semibold">Height</p>
                         <p>{pokemonDetails.height}</p>
                     </div>
-                    <div className="bg-gray-100 p-4 rounded-lg">
+                       <div className="bg-background border border-input p-4 rounded-lg">
                         <p className="font-semibold">Weight</p>
                         <p>{pokemonDetails.weight}</p>
                     </div>
-                    <div className="bg-gray-100 p-4 rounded-lg">
+                       <div className="bg-background border border-input p-4 rounded-lg">
                         <p className="font-semibold">Type</p>
                         <p className="capitalize">{pokemonDetails.type}</p>
                     </div>
@@ -235,7 +235,7 @@ export default async function Page({params}: PageProps) {
                                     <div key={index} className="relative">
                                         <Link href={`/pokemon/${evo.name}`}>
                                             <div className={`p-4 border rounded-lg text-center transition-all hover:scale-105 ${
-                                                evo.name === name.toLowerCase() ? "bg-red-800 text-white" : "bg-gray-100 hover:bg-gray-200"
+                                                evo.name === name.toLowerCase() ? "bg-red-800/30 border border-red-500 text-white" : "bg-background border border-input hover:bg-accent hover:text-accent-foreground"
                                             }`}>
                                                 <h4 className="font-semibold capitalize mb-2">{evo.name}</h4>
                                                 {evo.image ? (

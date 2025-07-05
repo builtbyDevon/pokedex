@@ -7,111 +7,111 @@ export interface PokemonTypeConfig {
 
 export const POKEMON_TYPES: Record<string, PokemonTypeConfig> = {
   water: {
-    color: '#47A6FE',
+    color: 'rgba(71, 166, 254, 1)',
     textColor: 'dark',
-    gradientFrom: '#47A6FE',
+    gradientFrom: 'rgba(71, 166, 254, 1)',
     gradientTo: 'transparent'
   },
   fire: {
-    color: '#FF624E',
+    color: 'rgba(255, 98, 78, 1)',
     textColor: 'dark',
-    gradientFrom: '#FF624E',
+    gradientFrom: 'rgba(255, 98, 78, 1)',
     gradientTo: 'transparent'
   },
   bug: {
-    color: '#8EB719',
+    color: 'rgba(142, 183, 25, 1)',
     textColor: 'dark',
-    gradientFrom: '#8EB719',
+    gradientFrom: 'rgba(142, 183, 25, 1)',
     gradientTo: 'transparent'
   },
   normal: {
-    color: '#BEB7AB',
+    color: 'rgba(190, 183, 171, 1)',
     textColor: 'dark',
-    gradientFrom: '#BEB7AB',
+    gradientFrom: 'rgba(190, 183, 171, 1)',
     gradientTo: 'transparent'
   },
   fairy: {
-    color: '#F2ADF2',
+    color: 'rgba(242, 173, 242, 1)',
     textColor: 'dark',
-    gradientFrom: '#F2ADF2',
+    gradientFrom: 'rgba(242, 173, 242, 1)',
     gradientTo: 'transparent'
   },
   grass: {
-    color: '#80CE44',
+    color: 'rgba(128, 206, 68, 1)',
     textColor: 'dark',
-    gradientFrom: '#80CE44',
+    gradientFrom: 'rgba(128, 206, 68, 1)',
     gradientTo: 'transparent'
   },
   poison: {
-    color: '#B97FC9',
+    color: 'rgba(185, 127, 201, 1)',
     textColor: 'dark',
-    gradientFrom: '#B97FC9',
+    gradientFrom: 'rgba(185, 127, 201, 1)',
     gradientTo: 'transparent'
   },
   electric: {
-    color: '#FFD84E',
+    color: 'rgba(255, 216, 78, 1)',
     textColor: 'dark',
-    gradientFrom: '#FFD84E',
+    gradientFrom: 'rgba(255, 216, 78, 1)',
     gradientTo: 'transparent'
   },
   rock: {
-    color: '#C9B569',
+    color: 'rgba(201, 181, 105, 1)',
     textColor: 'dark',
-    gradientFrom: '#C9B569',
+    gradientFrom: 'rgba(201, 181, 105, 1)',
     gradientTo: 'transparent'
   },
   ground: {
-    color: '#E6A74A',
+    color: 'rgba(230, 167, 74, 1)',
     textColor: 'dark',
-    gradientFrom: '#E6A74A',
+    gradientFrom: 'rgba(230, 167, 74, 1)',
     gradientTo: 'transparent'
   },
   psychic: {
-    color: '#E86994',
+    color: 'rgba(232, 105, 148, 1)',
     textColor: 'dark',
-    gradientFrom: '#E86994',
+    gradientFrom: 'rgba(232, 105, 148, 1)',
     gradientTo: 'transparent'
   },
   flying: {
-    color: '#839CF3',
+    color: 'rgba(131, 156, 243, 1)',
     textColor: 'dark',
-    gradientFrom: '#839CF3',
+    gradientFrom: 'rgba(131, 156, 243, 1)',
     gradientTo: 'transparent'
   },
   ghost: {
-    color: '#A09CD0',
+    color: 'rgba(160, 156, 208, 1)',
     textColor: 'dark',
-    gradientFrom: '#A09CD0',
+    gradientFrom: 'rgba(160, 156, 208, 1)',
     gradientTo: 'transparent'
   },
   dark: {
-    color: '#615047',
+    color: 'rgba(97, 80, 71, 1)',
     textColor: 'light',
-    gradientFrom: '#615047',
+    gradientFrom: 'rgba(97, 80, 71, 1)',
     gradientTo: 'transparent'
   },
   steel: {
-    color: '#B9B9B9',
+    color: 'rgba(185, 185, 185, 1)',
     textColor: 'dark',
-    gradientFrom: '#B9B9B9',
+    gradientFrom: 'rgba(185, 185, 185, 1)',
     gradientTo: 'transparent'
   },
   fighting: {
-    color: '#F68C51',
+    color: 'rgba(246, 140, 81, 1)',
     textColor: 'dark',
-    gradientFrom: '#F68C51',
+    gradientFrom: 'rgba(246, 140, 81, 1)',
     gradientTo: 'transparent'
   },
   dragon: {
-    color: '#9C8EE6',
+    color: 'rgba(156, 142, 230, 1)',
     textColor: 'dark',
-    gradientFrom: '#9C8EE6',
+    gradientFrom: 'rgba(156, 142, 230, 1)',
     gradientTo: 'transparent'
   },
   ice: {
-    color: '#4EDFFF',
+    color: 'rgba(78, 223, 255, 1)',
     textColor: 'dark',
-    gradientFrom: '#4EDFFF',
+    gradientFrom: 'rgba(78, 223, 255, 1)',
     gradientTo: 'transparent'
   }
 };
@@ -119,10 +119,10 @@ export const POKEMON_TYPES: Record<string, PokemonTypeConfig> = {
 // Helper functions
 export function getPokemonTypeConfig(type: string): PokemonTypeConfig {
   return POKEMON_TYPES[type] || {
-    color: '#6B7280',
+    color: 'rgba(107, 114, 128, 1)',
     textColor: 'light',
-    gradientFrom: '#6B7280',
-    gradientTo: '#5A6268'
+    gradientFrom: 'rgba(107, 114, 128, 1)',
+    gradientTo: 'rgba(90, 98, 104, 1)'
   };
 }
 
