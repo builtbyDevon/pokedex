@@ -45,13 +45,14 @@ export default async function Pokemon(props: PokemonProps) {
                     <Image className="absolute bg-background/50 backdrop-blur-md transition-all z-100 flex w-[50px] h-[50px] group-hover:w-[75px] group-hover:h-[75px] items-center justify-center p-[2px] shadow-lg right-3 top-3 rounded-full" src={miniImage} width="75" height="75" alt={`${name}-sprite`} />
                 )}
 
-                <div className="absolute group-hover:opacity-100 group-hover:transform(scale(2)) opacity-0 transition-opacity duration-300 -z-1 rounded-4xl h-full w-full" style={{
-                    backgroundImage: `linear-gradient(var(--background), var(--background)), linear-gradient(220deg, ${config.gradientFrom.replace('1)', '1)')}, rgb(0, 0, 0) 100%, ${config.gradientTo})`,
+                <div className="absolute group-hover:opacity-100  group-hover:transform(scale(2)) opacity-0 -z-1 rounded-4xl h-full w-full" style={{
+                    backgroundImage: `linear-gradient(var(--background), var(--background)), linear-gradient(220deg, ${config.gradientFrom.replace('1)', '1)')}, rgba(0, 0, 0, 0) 100%, ${config.gradientTo})`,
                     backgroundOrigin: 'border-box',
                     backgroundClip: 'content-box, border-box',
                     border: '2px solid transparent',
-                    animation: "gradient 1.3s ease-in-out infinite",
-                    backgroundSize: "199% 199%"
+                    animation: "gradient 1.2s ease-in-out infinite",
+                    backgroundSize: "199% 199%", // Increased size to make animation more visible
+                    backgroundPosition: "0% 0%" // Explicitly set initial position
                 }}>
                 </div>
                 <div
