@@ -14,7 +14,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     const { id } = await params;
     const search = await searchParams;
 
-    const type = search.type as string;
+    const type = search?.type as string || undefined;
 
     return (
         <>

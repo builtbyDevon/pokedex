@@ -8,7 +8,7 @@ interface PageProps {
 
 export default async function Home({ searchParams }: PageProps) {
   const search = await searchParams;
-  const type = search.type as string;
+  const type = search?.type as string || undefined;
 
 
   return (

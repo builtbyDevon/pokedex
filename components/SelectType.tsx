@@ -11,7 +11,7 @@ import {
 import Types from "@/components/Types";
 
 interface SelectTypeProps {
-    type: string;
+    type?: string;
 }
 
 const types = [
@@ -45,7 +45,7 @@ export default function SelectType(type: SelectTypeProps) {
         Filter:
       </label>
       <Select
-        value={type.type}
+        value={type.type || "All"}
         onValueChange={(value) => {
           router.push(`/page/1${value === "All" ? "" : `?type=${value}`}`);
         }}
