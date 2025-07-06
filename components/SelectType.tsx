@@ -53,7 +53,7 @@ export default function SelectType(type: SelectTypeProps) {
         <SelectTrigger id="type-select" className="w-[200px]">
           <SelectValue placeholder="Filter by Type" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="relative z-200">
           {types.map((type) => (
             <SelectItem key={type.value} value={type.value}>
               {type.value === "All" ? (

@@ -46,12 +46,12 @@ export default async function Pokemon(props: PokemonProps) {
                 )}
 
                 <div className="absolute group-hover:opacity-100 group-hover:transform(scale(2)) opacity-0 transition-opacity duration-300 -z-1 rounded-4xl h-full w-full" style={{
-                    backgroundImage: `linear-gradient(var(--background), var(--background)), linear-gradient(220deg, ${config.gradientFrom.replace('1)', '0.8)')}, rgb(0, 0, 0) 80%, ${config.gradientTo})`,
+                    backgroundImage: `linear-gradient(var(--background), var(--background)), linear-gradient(220deg, ${config.gradientFrom.replace('1)', '1)')}, rgb(0, 0, 0) 100%, ${config.gradientTo})`,
                     backgroundOrigin: 'border-box',
                     backgroundClip: 'content-box, border-box',
                     border: '2px solid transparent',
-                    animation: "gradient 2s ease-in-out infinite",
-                    backgroundSize: "200% 200%"
+                    animation: "gradient 1.3s ease-in-out infinite",
+                    backgroundSize: "199% 199%"
                 }}>
                 </div>
                 <div

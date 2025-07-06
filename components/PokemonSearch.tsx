@@ -137,7 +137,7 @@ export default function PokemonSearch() {
             </div>
 
             {searchTerm && (
-                <div className="mt-2 max-h-96 z-50 overflow-y-auto dark:bg-primary border border-bg-border rounded-lg bg-white shadow-lg absolute w-full">
+                <div className="mt-2 max-h-96 z-200 overflow-y-auto dark:bg-primary border border-bg-border rounded-lg bg-white shadow-lg absolute w-full">
                     {filteredPokemon.length === 0 ? (
                         <div className="p-4 text-center text-gray-500">
                             No Pokemon found for &quot;{searchTerm}&quot;
