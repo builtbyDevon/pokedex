@@ -1,5 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
 
 
 interface PokemonDetails {
@@ -242,15 +247,24 @@ export default async function Page({params}: PageProps) {
                             {pokemonDetails.stats.map((stat: any, index: number) => {
                                 {console.log(convertStatsProgressPercent(stat.base_stat))}
                                 return (
-                                    <div key={index} className="mb-2 flex gap-3 items-left justify-left">
+                                    <Tooltip  key={index} >
+                                            <TooltipTrigger asChild>
+                                    <div className="mb-2 flex gap-3 items-left justify-left">
                                         <span className="capitalize shrink-0 min-w-18 text-left inline">{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
                                         <div className="relative w-full h-5 rounded-lg bg-muted mt-1 mb-1">
+                                        
                                             <div
                                                 className="w-full h-5 rounded-lg"
                                                 style={{ width: `${convertStatsProgressPercent(stat.base_stat)}%`, backgroundColor: statColors[stat.stat.name.replace("-", "_") as keyof PokemonStatColors] }}
                                             ></div>
+                                            
                                         </div>
                                     </div>
+                                    </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p className="capitalize">{stat.stat.name.replace("-", " ")}: <strong>{stat.base_stat}</strong></p>
+                                        </TooltipContent>
+                                    </Tooltip>
                                 )
                             })}
                         </div>
