@@ -14,14 +14,12 @@ interface PaginationProps {
 
 export default function Pagination({ pageId, pages, type, amount }: PaginationProps) {
         const pageAmount = 4;
-        console.log('wtf is pages ', pages);
 
         let maxPages = 87;
         if (pages !== undefined) {
             maxPages = Math.ceil(pages / amount) + 1;
         }
 
-        console.log('max pages is ', maxPages)
         const gap = 3;
         const buttonStyling = "p-2 mx-1 rounded-lg my-1"
         const [loading, setLoading] = useState(false);
@@ -38,7 +36,6 @@ export default function Pagination({ pageId, pages, type, amount }: PaginationPr
                 }
         }
 
-        console.log('page d is ', (pageId - pageAmount));
 
 
         function GenerateBackButtons () {

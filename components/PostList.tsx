@@ -28,7 +28,6 @@ export default async function PostList({ pageId }: PostList) {
             const countData = await count.json()
 
             const totalCount = countData.count;
-            console.log('total Count ', totalCount);
             const fetchedData = {returnedPokemon: data.results, totalCount: totalCount}
             return fetchedData;
         }
@@ -44,7 +43,6 @@ export default async function PostList({ pageId }: PostList) {
 
     return (
     <main>
-        {/* {console.log('hedoo, ', pokemon?.totalCount )} */}
     <div className="grid grid-cols-1 sm:grid-cols-2 relative z-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 max-w-[1300px] mx-auto">
         {pokemon?.returnedPokemon?.length === 0 && <p>No Pokemon found</p>}
         {pokemon?.returnedPokemon?.map((poke: Pokemon, index: number) => {

@@ -38,7 +38,6 @@ const types = [
 
 export default function SelectType(type: SelectTypeProps) {
   const router = useRouter();
-    console.log('type ', type);
   return (
     <div className="max-w-[1300px] mx-auto">
       <label htmlFor="type-select" className="inline-block mb-2">

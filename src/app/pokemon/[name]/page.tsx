@@ -8,6 +8,16 @@ interface PokemonDetails {
     weight: string;
     type: string;
     image: string;
+    stats: any;
+  }
+
+  interface PokemonStatColors {
+    hp: string;
+    attack: string;
+    defense: string;
+    special_attack: string;
+    special_defense: string;
+    speed: string;
   }
   
   interface Evolution {
@@ -62,6 +72,11 @@ export default async function Page({params}: PageProps) {
         const kg = hg / 10; // Convert hectograms to kilograms
         const lbs = kg * 2.20462; // Convert kilograms to pounds
         return `${lbs.toFixed(1)} lbs`;
+    }
+
+    function convertStatsProgressPercent(number: number) {
+        const percent = Math.round(Math.min((number / 180) * 100, 100));
+        return percent;
     }
 
     async function getPokemonDetails(pokename: string) { 
@@ -167,11 +182,22 @@ export default async function Page({params}: PageProps) {
     const pokemonEvolutions = await getPokemonEvolutions(name);
     const pokemonObject = await getPokemonDetails(name);
 
+    const statColors: PokemonStatColors = {
+        hp: "#7DC94E",
+        attack: "#FF624E",
+        defense: "#0085FF",
+        special_attack: "#FF624E",
+        special_defense: "#0085FF",
+        speed: "#FEA521",
+    }
+    // console.log('pokemonObject ', pokemonObject.stats);
+
     
     const pokemonDetails: PokemonDetails = {
         name: pokemonObject.name,
         height: convertHeight(pokemonObject.height),
         weight: convertWeight(pokemonObject.weight),
+        stats: pokemonObject.stats,
         type: pokemonObject.types[0].type.name,
         image:
           pokemonObject.sprites.other["official-artwork"].front_default,
@@ -180,6 +206,7 @@ export default async function Page({params}: PageProps) {
     
 
     pokemonDetails.name = pokemonObject.name;
+    pokemonDetails.stats = pokemonObject.stats;
     pokemonDetails.height = convertHeight(pokemonObject.height);
     pokemonDetails.weight = convertWeight(pokemonObject.weight);
     pokemonDetails.type = pokemonObject["types"][0].type.name;
@@ -206,7 +233,28 @@ export default async function Page({params}: PageProps) {
                         <p className="font-semibold">Type</p>
                         <p className="capitalize">{pokemonDetails.type}</p>
                     </div>
+       
                 </div>
+
+                <div className="bg-background w-full border border-input p-4 rounded-lg">
+                        <p className="font-semibold">Stats</p>
+                        <div className="flex flex-col gap-2">
+                            {pokemonDetails.stats.map((stat: any, index: number) => {
+                                {console.log(convertStatsProgressPercent(stat.base_stat))}
+                                return (
+                                    <div key={index} className="mb-2 flex gap-3 items-left justify-left">
+                                        <span className="capitalize shrink-0 min-w-18 text-left inline">{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
+                                        <div className="relative w-full h-5 rounded-lg bg-muted mt-1 mb-1">
+                                            <div
+                                                className="w-full h-5 rounded-lg"
+                                                style={{ width: `${convertStatsProgressPercent(stat.base_stat)}%`, backgroundColor: statColors[stat.stat.name.replace("-", "_") as keyof PokemonStatColors] }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
 
 
         <h3 className="mt-5  text-2xl">Evolutions</h3>
@@ -250,6 +298,8 @@ export default async function Page({params}: PageProps) {
                                     </div>
                                 ))}
                             </div>
+
+                    
                             
                             {/* Add arrows pointing down to next level */}
                             {levelIndex < levels.length - 1 && (

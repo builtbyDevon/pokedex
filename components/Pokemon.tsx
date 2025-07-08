@@ -18,11 +18,15 @@ export default async function Pokemon(props: PokemonProps) {
     const getPokemonResp = await fetch(`https://pokeapi.co/api/v2/pokemon/${props.name}/`);
     const getPokemon = await getPokemonResp.json();
 
+
     const name = getPokemon.name;
     console.log(getPokemon.sprites);
     const image = getPokemon.sprites.other['official-artwork'].front_default;
     const miniImage = getPokemon.sprites.front_default;
     const types = getPokemon.types;
+
+
+
 
     const typesCombined: string[] = [];
     types.map((type: PokemonType)=> {
@@ -68,6 +72,7 @@ export default async function Pokemon(props: PokemonProps) {
                     {image !== null ? <Image className="relative z-80" quality="100" width="238" height="238" src={image} alt={name} /> : <div className="flex items-center justify-center opacity-50 w-[258px] h-[258px]">No image found</div>}
                 </div>
             </div>
+      
             <p className="first-letter:uppercase text-xl py-2 font-bold">{name}</p>
             <div className="flex gap-2">{typesCombined.map((type, index )=> {
                return (<Types key={index} type={type} />);
