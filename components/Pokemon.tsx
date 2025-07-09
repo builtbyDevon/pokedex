@@ -20,7 +20,6 @@ export default async function Pokemon(props: PokemonProps) {
 
 
     const name = getPokemon.name;
-    console.log(getPokemon.sprites);
     const image = getPokemon.sprites.other['official-artwork'].front_default;
     const miniImage = getPokemon.sprites.front_default;
     const types = getPokemon.types;

@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-  } from "@/components/ui/tooltip"
+import PokemonStats from "@/components/PokemonStats";
+  
 
 
 interface PokemonDetails {
@@ -13,17 +10,14 @@ interface PokemonDetails {
     weight: string;
     type: string;
     image: string;
-    stats: any;
+    stats: Array<{
+        base_stat: number;
+        stat: {
+          name: string;
+        }
+      }>;
   }
 
-  interface PokemonStatColors {
-    hp: string;
-    attack: string;
-    defense: string;
-    special_attack: string;
-    special_defense: string;
-    speed: string;
-  }
   
   interface Evolution {
     name: string;
@@ -79,10 +73,6 @@ export default async function Page({params}: PageProps) {
         return `${lbs.toFixed(1)} lbs`;
     }
 
-    function convertStatsProgressPercent(number: number) {
-        const percent = Math.round(Math.min((number / 180) * 100, 100));
-        return percent;
-    }
 
     async function getPokemonDetails(pokename: string) { 
         const pokemonDetails = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokename}`);
@@ -187,16 +177,6 @@ export default async function Page({params}: PageProps) {
     const pokemonEvolutions = await getPokemonEvolutions(name);
     const pokemonObject = await getPokemonDetails(name);
 
-    const statColors: PokemonStatColors = {
-        hp: "#7DC94E",
-        attack: "#FF624E",
-        defense: "#0085FF",
-        special_attack: "#FF624E",
-        special_defense: "#0085FF",
-        speed: "#FEA521",
-    }
-    // console.log('pokemonObject ', pokemonObject.stats);
-
     
     const pokemonDetails: PokemonDetails = {
         name: pokemonObject.name,
@@ -241,34 +221,12 @@ export default async function Page({params}: PageProps) {
        
                 </div>
 
-                <div className="bg-background w-full border border-input p-4 rounded-lg">
-                        <p className="font-semibold">Stats</p>
-                        <div className="flex flex-col gap-2">
-                            {pokemonDetails.stats.map((stat: any, index: number) => {
-                                {console.log(convertStatsProgressPercent(stat.base_stat))}
-                                return (
-                                    <Tooltip  key={index} >
-                                            <TooltipTrigger asChild>
-                                    <div className="mb-2 flex gap-3 items-left justify-left">
-                                        <span className="capitalize shrink-0 min-w-18 text-left inline">{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
-                                        <div className="relative w-full h-5 rounded-lg bg-muted mt-1 mb-1">
-                                        
-                                            <div
-                                                className="w-full h-5 rounded-lg"
-                                                style={{ width: `${convertStatsProgressPercent(stat.base_stat)}%`, backgroundColor: statColors[stat.stat.name.replace("-", "_") as keyof PokemonStatColors] }}
-                                            ></div>
-                                            
-                                        </div>
-                                    </div>
-                                    </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p className="capitalize">{stat.stat.name.replace("-", " ")}: <strong>{stat.base_stat}</strong></p>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                )
-                            })}
-                        </div>
-                    </div>
+                        <div className="bg-background w-full border border-input p-4 rounded-lg">
+                            <p className="font-semibold">Base Stats</p>
+                            <div className="flex flex-col gap-2">
+                                <PokemonStats stats={pokemonDetails.stats} />
+                            </div>
+                </div>
 
 
         <h3 className="mt-5  text-2xl">Evolutions</h3>
