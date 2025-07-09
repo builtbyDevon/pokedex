@@ -20,7 +20,7 @@ export default function Pagination({ pageId, pages, type, amount }: PaginationPr
             maxPages = Math.ceil(pages / amount) + 1;
         }
 
-        const gap = 3;
+        const gap = 1;
         const buttonStyling = "p-2 mx-1 rounded-lg my-1"
         const [loading, setLoading] = useState(false);
         const loadingCSS = "pointer-events-none opacity-60"

@@ -6,6 +6,7 @@ import { getPokemonTypeConfig } from "../lib/pokemonTypes";
 interface PokemonProps {
     name: string;
     url: string;
+    typesAsLinks?: boolean;
 }
 
 interface PokemonType {
@@ -32,13 +33,29 @@ export default async function Pokemon(props: PokemonProps) {
         typesCombined.push(type.type.name);
      })
 
-    const config = getPokemonTypeConfig(typesCombined[0]);
-    const gradientStyle = {
-        background: `linear-gradient(220deg, ${config.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')}, ${config.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')}, ${config.gradientTo})`
-    };
-    const gradientStyleHover = {
-        background: `linear-gradient(220deg, ${config.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-1))')}, ${config.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-2))')}, ${config.gradientTo})`
-    };
+    const primaryConfig = getPokemonTypeConfig(typesCombined[0]);
+    const secondaryConfig = typesCombined.length > 1 ? getPokemonTypeConfig(typesCombined[1]) : null;
+    
+    // Create gradient based on number of types
+    let gradientStyle, gradientStyleHover;
+    
+    if (typesCombined.length > 1 && secondaryConfig) {
+        // Dual-type gradient: primary type to secondary type
+        gradientStyle = {
+            background: `linear-gradient(45deg, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')} 0%, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')} 40%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')} 60%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')} 100%)`
+        };
+        gradientStyleHover = {
+            background: `linear-gradient(45deg, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-1))')} 0%, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-2))')} 40%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-2))')} 60%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-1))')} 100%)`
+        };
+    } else {
+        // Single-type gradient (original behavior)
+        gradientStyle = {
+            background: `linear-gradient(220deg, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')}, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')}, ${primaryConfig.gradientTo})`
+        };
+        gradientStyleHover = {
+            background: `linear-gradient(220deg, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-1))')}, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-hover-opacity-2))')}, ${primaryConfig.gradientTo})`
+        };
+    }
 
 
     return (
@@ -49,7 +66,7 @@ export default async function Pokemon(props: PokemonProps) {
                 )}
 
                 <div className="absolute group-hover:opacity-100  group-hover:transform(scale(2)) opacity-0 -z-1 rounded-4xl h-full w-full" style={{
-                    backgroundImage: `linear-gradient(var(--background), var(--background)), linear-gradient(220deg, ${config.gradientFrom.replace('1)', '1)')}, rgba(0, 0, 0, 0) 100%, ${config.gradientTo})`,
+                    backgroundImage: `linear-gradient(var(--background), var(--background)), linear-gradient(220deg, ${primaryConfig.gradientFrom.replace('1)', '1)')}, rgba(0, 0, 0, 0) 100%, ${primaryConfig.gradientTo})`,
                     backgroundOrigin: 'border-box',
                     backgroundClip: 'content-box, border-box',
                     border: '2px solid transparent',
@@ -68,13 +85,13 @@ export default async function Pokemon(props: PokemonProps) {
                         style={gradientStyleHover} 
                         className="rounded-4xl group-hover:opacity-100 opacity-0 z-70 absolute w-full h-full bg-background group-hover:transition-opacity group-hover:duration-300"
                         > </div>
-                    {image !== null ? <Image className="relative z-80" quality="100" width="238" height="238" src={image} alt={name} /> : <div className="flex items-center justify-center opacity-50 w-[258px] h-[258px]">No image found</div>}
+                    {image !== null ? <Image className="relative z-80" quality="100" width="256" height="256" src={image} alt={name} /> : <div className="flex items-center justify-center opacity-50 w-[258px] h-[258px]">No image found</div>}
                 </div>
-            </div>
+        </div>
       
-            <p className="first-letter:uppercase text-xl py-2 font-bold">{name}</p>
-            <div className="flex gap-2">{typesCombined.map((type, index )=> {
-               return (<Types key={index} type={type} />);
+            <p className="capitalize text-xl py-2 font-bold">{name.replace("-", " ")}</p>
+            <div className="flex gap-2 pointer-events-none">{typesCombined.map((type, index )=> {
+               return (<Types asLink={props.typesAsLinks || false} key={index} type={type} />);
             })}</div>
         </div>
     );

@@ -141,7 +141,7 @@
   --primary-foreground: white;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: rgb(21, 21, 21);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
@@ -251,4 +251,19 @@
 .pokeball-animate {
   animation: pokeball-animate 1s ease-in-out infinite;
   transform-origin: center;
+}
+
+
+
+.trim-whitespace {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  /* Remove any padding/margins */
+  padding: 0;
+  margin: 0;
+  margin-bottom: -62px;
+  /* Ensure no extra space */
+  display: block;
+  line-height: 0;
 }

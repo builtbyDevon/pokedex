@@ -123,7 +123,7 @@ export default function PokemonSearch() {
                     type="text"
                     placeholder="Search Pokemon..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => setSearchTerm(e.target.value.replace(" ", "-"))}
                     className="w-full px-4 py-3 rounded-lg"
                 />
                 {searchTerm && (
@@ -169,7 +169,7 @@ export default function PokemonSearch() {
                                                 </div>
                                             )}
                                         </div>
-                                        <span className="capitalize font-medium text-base">{pokemon.name}</span>
+                                        <span className="capitalize font-medium text-base">{pokemon.name.replace("-", " ")}</span>
                                     </div>
                                 </Link>
                             ))}

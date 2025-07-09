@@ -61,8 +61,8 @@ export default function SelectType(type: SelectTypeProps) {
                   {type.label}
                 </span>
               ) : (
-                <div className="flex items-center gap-2">
-                  <Types type={type.value} />
+                <div className="flex pointer-events-none items-center gap-2">
+                  <Types asLink={false} type={type.value} />
                 </div>
               )}
             </SelectItem>

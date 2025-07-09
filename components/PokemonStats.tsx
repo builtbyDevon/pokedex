@@ -2,12 +2,10 @@
 
 import { useState } from 'react';
 import InView from './InView';
+import Image from 'next/image';
 
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-  } from "@/components/ui/tooltip"
+
+import { TooltipOrPopover } from "@/components/ui/tooltip-or-popover";
 
   interface Stats {
     stats: Array<{
@@ -58,27 +56,23 @@ export default function PokemonStats(stats: Stats) {
             <InView onEnter={() => setProgBarGrow(true)}>
             {stats.stats.map((stat: Stat, index: number) => {
             return (
-                
-                <Tooltip key={index} >
-                    <TooltipTrigger asChild>
-                    <div className="mb-2 flex gap-3 items-left justify-left">
-                        <span className="capitalize shrink-0 min-w-18 text-left inline">{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
-                        <div className="relative w-full h-5 rounded-lg bg-muted mt-1 mb-1">
+                <TooltipOrPopover
+                    key={index}
+                    content={<p className="capitalize">{stat.stat.name.replace("-", " ")}: <strong>{stat.base_stat}</strong></p>}
+                >
+                    <div className="mb-2 group flex items-center gap-3 justify-center mb-4 max-w-100">
+                        <span className="capitalize flex items-center shrink-0 min-w-30 text-left font-bold gap-3"><Image alt={stat.stat.name} width={30} height={30} src={`/stats/`+stat.stat.name+".svg"} />{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
+                        <div className="relative w-full h-2 rounded-lg bg-muted mt-1 mb-1">
                             <div
-                                className="w-full transition-all duration-[2000ms] h-5 rounded-lg w-0"
+                                className="w-full group-hover:opacity-80 group-hover:duration-[200ms] transition-all duration-[2000ms] h-2 rounded-lg w-0"
                                 style={{ 
                                     width: progbarGrow ? `${convertStatsProgressPercent(stat.base_stat)}%` : '0%', 
                                     backgroundColor: statColors[stat.stat.name.replace("-", "_") as keyof PokemonStatColors],
                                 }}
                             ></div>
-                            
                         </div>
                     </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p className="capitalize">{stat.stat.name.replace("-", " ")}: <strong>{stat.base_stat}</strong></p>
-                    </TooltipContent>
-                </Tooltip>
+                </TooltipOrPopover>
             )
             })}
         </InView>
