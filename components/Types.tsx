@@ -31,7 +31,7 @@ export default function Types(props: TypesProps) {
             <Link
                 href={`/page/1?type=${props.type}`}
                 style={typeStyle}
-                className={`uppercase hover:opacity-80 active:scale-95 transition-all flex items-center font-press-start-2p text-[.5rem] inline-flex py-1 px-2 pr-3 gap-1 rounded-full`}
+                className={`uppercase hover:opacity-80 active:scale-95 transition-all flex items-center font-press-start-2p text-[.5rem] inline-flex py-2 px-2 pr-3 gap-1 rounded-full`}
             >
                 {type && <Image width="18" height="18" alt={type} src={"/types/" + type + ".svg"} />}
                 <p className="margin-0 padding-0 pointer-events-none relative">{props.type}</p>

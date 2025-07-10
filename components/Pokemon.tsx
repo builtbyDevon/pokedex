@@ -61,6 +61,7 @@ export default async function Pokemon(props: PokemonProps) {
     return (
         <div className="text-left max-w-[400px] mx-auto group relative hover:transform hover:scale-102 transition-all active:scale-100 active:transition-none">
             <div className="relative">
+                <div className="bg-background absolute rounded-4xl w-full h-full -z-50"></div>
                 {miniImage && (
                     <Image className="absolute bg-background/50 backdrop-blur-md transition-all z-100 flex w-[50px] h-[50px] group-hover:w-[75px] group-hover:h-[75px] items-center justify-center p-[2px] shadow-lg right-3 top-3 rounded-full" src={miniImage} width="75" height="75" alt={`${name}-sprite`} />
                 )}

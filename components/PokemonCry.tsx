@@ -17,6 +17,10 @@ const AudioPlayer = ({ src }: AudioPlayer) => {
   console.log('sound playiong ? ', soundPlaying);
 
   useEffect(() => {
+    // Don't initialize if no src is provided
+    if (!src) {
+      return;
+    }
    
     soundRef.current = new Howl({
       src: [src],
@@ -43,6 +47,11 @@ const AudioPlayer = ({ src }: AudioPlayer) => {
       soundRef.current.play();
     }
   };
+
+  // Don't render if no src is provided
+  if (!src) {
+    return null;
+  }
 
   return (
     <div className="absolute bottom-2 left-2">

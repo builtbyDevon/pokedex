@@ -42,7 +42,7 @@ export default async function PostListType({ pageId, type }: PostListType) {
     
     return (
     <main>
-  <div className="grid grid-cols-1 relative z-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 max-w-[1300px] mx-auto">
+  <div className="grid grid-cols-1 relative z-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 container px-4 mx-auto">
         {pokemon?.length === 0 && <p>No Pokemon found</p>}
         {pokemon?.pokemon?.map((poke: Pokemon, index: number) => {
             return (<Link href={`/pokemon/${poke.pokemon.name}`} key={index}><Pokemon name={poke.pokemon.name} url={poke.pokemon.url} /></Link>)

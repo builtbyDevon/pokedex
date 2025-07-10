@@ -3,6 +3,7 @@ import { Montserrat, Press_Start_2P } from "next/font/google";
 import NextTopLoader from 'nextjs-toploader';
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/Header";
+import Image from "next/image";
 import "./globals.css";
 
 const montserrat = Montserrat({ 
@@ -32,8 +33,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${pressStart2P.variable}`}>
       <head />
-      <body className={montserrat.className}>
-        <NextTopLoader color="#EE1515" showSpinner={false} />
+      <body className={`${montserrat.className} overflow-x-hidden`}>
+        <NextTopLoader color="var(--red)" showSpinner={false} />
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -41,7 +42,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
           <Header />
-          {children}
+          <div className="mt-45 relative">
+            <Image className="fixed rotate-[30deg] -z-50 opacity-5 dark:opacity-10 right-0 -top-50 grayscale" src="/pokedex.svg" alt="dex-bg" width={1200} height={30} />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

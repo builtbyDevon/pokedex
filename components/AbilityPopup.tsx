@@ -36,6 +36,10 @@ export default function AbilityPopup({ ability, isOpen, onClose }: AbilityPopupP
               </span>
             )}
           </div>
+
+          <p className="text-muted-foreground leading-relaxed italic">
+                {ability.flavorText}
+          </p>
           
           <div className="space-y-3">
             <div>
@@ -44,13 +48,7 @@ export default function AbilityPopup({ ability, isOpen, onClose }: AbilityPopupP
                 {ability.description}
               </p>
             </div>
-            
-            <div>
-              <h4 className="font-semibold text-sm text-muted-foreground mb-1">Flavor Text</h4>
-              <p className="text-muted-foreground leading-relaxed italic">
-                {ability.flavorText}
-              </p>
-            </div>
+          
             
             <div>
               <h4 className="font-semibold text-sm text-muted-foreground mb-1">Generation</h4>

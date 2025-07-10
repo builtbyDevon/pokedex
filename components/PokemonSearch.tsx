@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import { Input } from "@/components/ui/input"
 
 interface Pokemon {
@@ -12,14 +13,20 @@ interface Pokemon {
     id?: number;
 }
 
+interface isScrolled {
+    isScrolled: boolean
+}
 
-export default function PokemonSearch() {
+
+export default function PokemonSearch(isScrolled: isScrolled) {
     const [pokemon, setPokemon] = useState<Pokemon[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState(true);
     const [loadingSprites, setLoadingSprites] = useState<Set<string>>(new Set());
+    const { theme } = useTheme();
 
+    console.log('isScrolled ', isScrolled.isScrolled);
     // Fetch all Pokemon once on component mount
     useEffect(() => {
         async function fetchAllPokemon() {
@@ -117,19 +124,33 @@ export default function PokemonSearch() {
     }
 
     return (
-        <div className="w-full relative max-w-md">
+        <div className={`${`w-full relative transition-all duration-[500ms] max-w-xl`} ${isScrolled.isScrolled && `!max-w-md`}`}>
             <div className="relative">
+                <div className={`${isScrolled.isScrolled && `!hidden`} ${`w-1 h-1 absolute -top-3 right-[30%] rounded-full bg-foreground`}`}></div>
+                <div className={`${isScrolled.isScrolled && `!hidden`} ${`w-1 h-1 absolute -top-3 right-[33%] rounded-full bg-foreground`}`}></div>
+                <div className={`${isScrolled.isScrolled && `!hidden`} ${`w-3 h-3 absolute -bottom-5 right-[20%] rounded-full bg-[var(--red)]`}`}></div>
+                <Image 
+                    className="pointer-events-none absolute right-5 z-5 top-1/2 -translate-y-1/2" 
+                    alt="search-icon" 
+                    src={theme === 'dark' ? "/search-icon-dark.svg" : "/search-icon.svg"} 
+                    width={30} 
+                    height={30} 
+                />
+                <svg className="absolute pointer-events-none w-[3rem] right-[.45rem] bottom-[.2rem]" width="57" height="44" viewBox="0 0 57 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 44C0 44 48.5 39 49.5 0C52 2.5 61 13.5 53.5 29C45.8084 44.8959 30.5 44 0 44Z" fill="var(--muted)"/>
+                </svg>
+
                 <Input 
                     type="text"
-                    placeholder="Search Pokemon..."
+                    placeholder="Search the Dex for Pokemon..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value.replace(" ", "-"))}
-                    className="w-full px-4 py-3 rounded-lg"
+                    className={`${isScrolled.isScrolled && '!h-12'} ${`w-full !pr-20 bg-white dark:bg-muted font-bold px-8 h-14 border-3 shadow-none border-neutral-300 dark:border-input !text-lg rounded-full`}`}
                 />
                 {searchTerm && (
                     <button
                         onClick={() => setSearchTerm('')}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                        className="absolute right-15 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-foreground transition-colors"
                     >
                         ✕
                     </button>
@@ -137,14 +158,14 @@ export default function PokemonSearch() {
             </div>
 
             {searchTerm && (
-                <div className="mt-2 max-h-96 z-200 overflow-y-auto dark:bg-primary border border-bg-border rounded-lg bg-white shadow-lg absolute w-full">
+                <div className="mt-2 max-h-96 z-200 overflow-y-auto dark:bg-primary border border-bg-border rounded-4xl bg-white shadow-lg absolute w-full">
                     {filteredPokemon.length === 0 ? (
                         <div className="p-4 text-center text-gray-500">
                             No Pokemon found for &quot;{searchTerm}&quot;
                         </div>
                     ) : (
                         <>
-                            <div className="p-2 text-sm text-base border-b border-bg-border">
+                            <div className="p-2 px-5 text-sm text-base border-b border-bg-border">
                                 {filteredPokemon.length} result{filteredPokemon.length !== 1 ? 's' : ''}
                             </div>
                             {filteredPokemon.slice(0, 20).map((pokemon) => (
@@ -169,7 +190,7 @@ export default function PokemonSearch() {
                                                 </div>
                                             )}
                                         </div>
-                                        <span className="capitalize font-medium text-base">{pokemon.name.replace("-", " ")}</span>
+                                        <span className="capitalize font-bold text-base">{pokemon.name.replace("-", " ")}</span>
                                     </div>
                                 </Link>
                             ))}

@@ -16,7 +16,6 @@ export default async function Home({ searchParams }: PageProps) {
     <div>
       
       
-      <h1 className="text-center py-5 text-3xl font-bolds uppercase">Pokemon Database!</h1>
       <SelectType type={type} />
       <PostList pageId={1} />
     </div>

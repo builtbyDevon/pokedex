@@ -309,7 +309,7 @@ export default async function Page({params}: PageProps) {
     if (pokemonObject.types.length > 1 && secondaryConfig) {
         // Dual-type gradient: primary type to secondary type
         gradientStyle = {
-            background: `linear-gradient(45deg, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')} 0%, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')} 20%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')} 80%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')} 100%)`
+            background: `linear-gradient(45deg, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')} 0%, ${secondaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')} 40%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-2))')} 60%, ${primaryConfig.gradientFrom.replace('1)', 'var(--pokemon-gradient-opacity-1))')} 100%)`
         };
     } else {
         // Single-type gradient (original behavior)
@@ -374,7 +374,7 @@ export default async function Page({params}: PageProps) {
                 <div className="flex flex-col items-center">
                     <Link href={`/pokemon/${node.name}`}>
                         <div className={`p-6 rounded-full text-center transition-all hover:scale-105 bg-muted ${
-                            node.name === currentName.toLowerCase() ? "bg-highlight border-3 border-red-500 text-white" : "bg-background border border-input hover:bg-accent hover:text-accent-foreground"
+                            node.name === currentName.toLowerCase() ? "bg-highlight border-3 border-red-500 text-white" : "bg-background border-3 border-input hover:bg-accent hover:text-accent-foreground"
                         }`}>
                             {node.image ? (
                                 <Image alt={node.name} width={128} height={128} src={node.image} />
@@ -391,10 +391,10 @@ export default async function Page({params}: PageProps) {
                 {node.children && node.children.length > 0 && (
                     <>
                         <div className="flex flex-col items-center">
-                            <span className="mx-4 text-5xl text-gray-400">→</span>
+                            <span className="mx-4 text-5xl text-foreground">→</span>
                             {/* For linear, show trigger under arrow; for branching, skip here */}
                             {!isBranching && node.children.length === 1 && (
-                                <span className="text-sm text-gray-300 mt-1 flex flex-col items-center">
+                                <span className="text-sm text-foreground mt-1 flex flex-col items-center">
                                     {getTriggerText(node.children[0]) && (
                                         <span>{getTriggerText(node.children[0]).replace("-", " ")}</span>
                                     )}
@@ -408,7 +408,7 @@ export default async function Page({params}: PageProps) {
                                     <div key={child.name} className="flex flex-col items-center">
                                         <EvolutionBranch node={{ ...child, children: [] }} currentName={currentName} />
                                         {getTriggerText(child) && (
-                                            <span className="text-sm text-gray-300 mt-2">{getTriggerText(child).replace("-", " ")}</span>
+                                            <span className="text-sm text-foreground mt-2">{getTriggerText(child).replace("-", " ")}</span>
                                         )}
                                     </div>
                                 ))}
@@ -433,12 +433,15 @@ export default async function Page({params}: PageProps) {
         <div className="container mx-auto px-4 py-8">
             
             <div className="text-center">
+            <h1 className="text-4xl md:text-5xl text-left px-4 font-bold capitalize mb-3">{pokemonDetails.name}</h1>
                 
-                <div className="flex gap-12 flex-wrap mt-12">
+                <div className="flex gap-12 flex-wrap mt-8">
+
                     <aside className="max-w-120 flex-1 relative">
-                        <h1 className="text-4xl md:text-5xl text-left px-4 font-bold capitalize mb-6">{pokemonDetails.name}</h1>
+
                         <div className="relative p-2 flex border-1 border-input items-center justify-center rounded-4xl mb-10">
                             {/* Gradient background layers */}
+
                             <div
                                 style={gradientStyle} 
                                 className="rounded-4xl absolute w-full h-full bg-background"
@@ -491,7 +494,7 @@ export default async function Page({params}: PageProps) {
                                 )}
                             </div>
                         )}
-                        <div className="grid grid-cols-1 md:grid-cols-2 border-1 border-input gap-4 mb-8 bg-muted p-7 rounded-4xl">
+                        <div className="grid grid-cols-1 md:grid-cols-2 border-3 border-input gap-4 mb-8 bg-muted p-7 rounded-4xl">
                             <div className="">
                                 <p className="font-bold text-2xl mb-2 text-left">Height</p>
                                 <p className="text-left text-xl">{pokemonDetails.height}</p>

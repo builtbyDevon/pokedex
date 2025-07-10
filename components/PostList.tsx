@@ -43,7 +43,7 @@ export default async function PostList({ pageId }: PostList) {
 
     return (
     <main>
-    <div className="grid grid-cols-1 sm:grid-cols-2 relative z-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 max-w-[1300px] mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 relative z-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10 mt-4 container px-4 mx-auto">
         {pokemon?.returnedPokemon?.length === 0 && <p>No Pokemon found</p>}
         {pokemon?.returnedPokemon?.map((poke: Pokemon, index: number) => {
             return (<Link href={`/pokemon/${poke.name}`} key={index}><Pokemon name={poke.name} url={poke.url} /></Link>)
