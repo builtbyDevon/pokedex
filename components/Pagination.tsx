@@ -20,7 +20,6 @@ export default function Pagination({ pageId, pages, type, amount }: PaginationPr
             maxPages = Math.ceil(pages / amount) + 1;
         }
 
-        const gap = 1;
         const buttonStyling = "p-2 mx-1 rounded-lg my-1"
         const [loading, setLoading] = useState(false);
         const loadingCSS = "pointer-events-none opacity-60"
@@ -67,11 +66,11 @@ export default function Pagination({ pageId, pages, type, amount }: PaginationPr
 
 
         return (
-        <div className={`flex justify-center items-end flex-wrap py-12 gap-${gap}`}> 
+        <div className={`flex justify-center items-end flex-wrap py-12`}> 
             {pageId - 1 > 0 ?  <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={pageId - 1 > 0 ? `/page/${pageId - 1}${type ? `?type=${type}` : ''}` : ''}> <ChevronLeftIcon /></Link></Button> : ""}
             {pageId !== 1 && (pageId - pageAmount) >= 2 && <Button variant="outline" asChild><Link onClick={buttonClick} className={`${buttonStyling} ${loading ? loadingCSS : ""}`} href={`/page/1${type ? `?type=${type}` : ''}`}>1</Link></Button>}
             {pageId !== 1 && (pageId - pageAmount) >= 2 &&  <div className="mx-2 opacity-80">...</div>}
-            <div className={`flex gap-${gap} flex-row-reverse`}>
+            <div className={`flex flex-row-reverse`}>
                 {BackButtons.map((backButton) => {
                     return (backButton)
                 })}

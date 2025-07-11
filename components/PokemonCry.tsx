@@ -14,7 +14,6 @@ const AudioPlayer = ({ src }: AudioPlayer) => {
   const soundRef = useRef<Howl | null>(null);
   const [soundPlaying, setSoundPlaying] = useState(false);
 
-  console.log('sound playiong ? ', soundPlaying);
 
   useEffect(() => {
     // Don't initialize if no src is provided

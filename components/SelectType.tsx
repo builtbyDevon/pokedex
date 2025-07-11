@@ -49,14 +49,14 @@ export default function SelectType(type: SelectTypeProps) {
           router.push(`/page/1${value === "All" ? "" : `?type=${value}`}`);
         }}
       >
-        <SelectTrigger id="type-select" className="w-[200px]">
+        <SelectTrigger id="type-select" className="py-4 w-[200px]">
           <SelectValue placeholder="Filter by Type" />
         </SelectTrigger>
         <SelectContent className="relative z-200">
           {types.map((type) => (
             <SelectItem key={type.value} value={type.value}>
               {type.value === "All" ? (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center font-bold gap-2">
                   <span className="w-4 h-4 bg-gray-400 rounded-full"></span>
                   {type.label}
                 </span>

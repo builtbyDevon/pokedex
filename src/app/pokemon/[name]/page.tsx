@@ -7,6 +7,7 @@ import Types from "@/components/Types";
 import AbilitiesSection from "@/components/AbilitiesSection";
 import { TooltipOrPopover } from "@/components/ui/tooltip-or-popover"
 import { getPokemonTypeConfig } from "../../../../lib/pokemonTypes";
+import PokemonPageClient from "@/components/PokemonPageClient";
 
 interface PokemonDetails {
     name: string;
@@ -374,7 +375,7 @@ export default async function Page({params}: PageProps) {
                 <div className="flex flex-col items-center">
                     <Link href={`/pokemon/${node.name}`}>
                         <div className={`p-6 rounded-full text-center transition-all hover:scale-105 bg-muted ${
-                            node.name === currentName.toLowerCase() ? "bg-highlight border-3 border-red-500 text-white" : "bg-background border-3 border-input hover:bg-accent hover:text-accent-foreground"
+                            node.name === currentName.toLowerCase() ? "bg-highlight border-3 border-[var(--red)] text-white" : "bg-background border-3 border-input hover:bg-accent hover:text-accent-foreground"
                         }`}>
                             {node.image ? (
                                 <Image alt={node.name} width={128} height={128} src={node.image} />
@@ -439,31 +440,11 @@ export default async function Page({params}: PageProps) {
 
                     <aside className="max-w-120 flex-1 relative">
 
-                        <div className="relative p-2 flex border-1 border-input items-center justify-center rounded-4xl mb-10">
-                            {/* Gradient background layers */}
-
-                            <div
-                                style={gradientStyle} 
-                                className="rounded-4xl absolute w-full h-full bg-background"
-                            > </div>
-                            
-                            {/* Content */}
-                            <div className="relative z-10 w-full min-h-100 items-center flex">
-                                <PokemonCry src={pokemonDetails.cries.latest} />
-                                {pokemonDetails.image && pokemonDetails.name && (
-                                    <div className="relative w-full h-full flex items-center justify-center">
-                                        <Image 
-                                            alt={pokemonDetails.name} 
-                                            width={256} 
-                                            height={256} 
-                                            quality={100} 
-                                            src={pokemonDetails.image}
-                                            className="object-contain max-w-full max-h-full"
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                        <PokemonPageClient 
+                            pokemonObject={pokemonObject}
+                            pokemonDetails={pokemonDetails}
+                            gradientStyle={gradientStyle}
+                        />
                  
                             
                             

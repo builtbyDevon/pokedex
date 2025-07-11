@@ -8,7 +8,6 @@ interface isScrolled {
 
 
 export default function Logo(isScrolled: isScrolled) {
-    console.log('isscrolledd ', isScrolled)
     return (
         <Link className="flex gap-2 items-center" href="/">
             <Image priority quality={100} src="/logo-dex.png" width={isScrolled.isScrolled ? 50 : 72.92} height={63} alt="Logo image" />

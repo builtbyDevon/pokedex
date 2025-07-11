@@ -26,7 +26,6 @@ export default function PokemonSearch(isScrolled: isScrolled) {
     const [loadingSprites, setLoadingSprites] = useState<Set<string>>(new Set());
     const { theme } = useTheme();
 
-    console.log('isScrolled ', isScrolled.isScrolled);
     // Fetch all Pokemon once on component mount
     useEffect(() => {
         async function fetchAllPokemon() {
