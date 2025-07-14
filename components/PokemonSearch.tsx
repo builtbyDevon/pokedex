@@ -135,16 +135,16 @@ export default function PokemonSearch(isScrolled: isScrolled) {
                     width={30} 
                     height={30} 
                 />
-                <svg className="absolute pointer-events-none w-[3rem] right-[.45rem] bottom-[.2rem]" width="57" height="44" viewBox="0 0 57 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="absolute pointer-events-none w-[2rem] md:w-[3rem] right-[.45rem] -bottom-[0.2rem] md:right-[.45rem] md:bottom-[.2rem]" width="57" height="44" viewBox="0 0 57 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 44C0 44 48.5 39 49.5 0C52 2.5 61 13.5 53.5 29C45.8084 44.8959 30.5 44 0 44Z" fill="var(--muted)"/>
                 </svg>
 
                 <Input 
                     type="text"
-                    placeholder="Search the Dex for Pokemon..."
+                    placeholder="Search Pokemon..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value.replace(" ", "-"))}
-                    className={`${isScrolled.isScrolled && '!h-12'} ${`w-full !pr-20 bg-white dark:bg-muted font-bold px-8 h-14 border-3 shadow-none border-neutral-300 dark:border-input !text-lg rounded-full`}`}
+                    className={`${isScrolled.isScrolled && '!h-10'} ${`w-full !pr-20 bg-white dark:bg-muted font-bold px-4 md:px-8 h-12 md:h-14 border-3 shadow-none border-neutral-300 dark:border-input !text-base !md:text-lg rounded-full`}`}
                 />
                 {searchTerm && (
                     <button

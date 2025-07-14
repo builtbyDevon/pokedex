@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import PokemonStats from "@/components/PokemonStats";
 import React from "react";
-import PokemonCry from "@/components/PokemonCry";
 import Types from "@/components/Types";
 import AbilitiesSection from "@/components/AbilitiesSection";
 import { TooltipOrPopover } from "@/components/ui/tooltip-or-popover"
@@ -370,15 +369,15 @@ export default async function Page({params}: PageProps) {
         }
         const isBranching = node.children && node.children.length > 1;
         return (
-            <div className="flex flex-row items-center gap-8 justify-center">
+            <div className="flex flex-col xl:flex-row  gap-8 xl:items-baseline items-center justify-center">
                 {/* Current Pokémon */}
-                <div className="flex flex-col items-center">
+                <div className="flex w-40 min-w-40 flex-shrink-0 flex-col items-center">
                     <Link href={`/pokemon/${node.name}`}>
                         <div className={`p-6 rounded-full text-center transition-all hover:scale-105 bg-muted ${
                             node.name === currentName.toLowerCase() ? "bg-highlight border-3 border-[var(--red)] text-white" : "bg-background border-3 border-input hover:bg-accent hover:text-accent-foreground"
                         }`}>
                             {node.image ? (
-                                <Image alt={node.name} width={128} height={128} src={node.image} />
+                                <Image alt={node.name} width={256} height={256} src={node.image} />
                             ) : (
                                 <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center">
                                     <span className="text-gray-500">?</span>
@@ -391,11 +390,11 @@ export default async function Page({params}: PageProps) {
                 {/* If there are children, show arrow and next stage(s) */}
                 {node.children && node.children.length > 0 && (
                     <>
-                        <div className="flex flex-col items-center">
-                            <span className="mx-4 text-5xl text-foreground">→</span>
+                        <div className="flex flex-col items-center relative xl:bottom-15">
+                            <span className="mx-4 text-4xl flex items-center text-foreground rotate-90 xl:rotate-0">→</span>
                             {/* For linear, show trigger under arrow; for branching, skip here */}
                             {!isBranching && node.children.length === 1 && (
-                                <span className="text-sm text-foreground mt-1 flex flex-col items-center">
+                                <span className="text-sm mt-4 xl:mt-0 text-foreground">
                                     {getTriggerText(node.children[0]) && (
                                         <span>{getTriggerText(node.children[0]).replace("-", " ")}</span>
                                     )}
@@ -404,9 +403,12 @@ export default async function Page({params}: PageProps) {
                         </div>
                         {isBranching ? (
                             // Branching evolutions: show trigger under each card
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <div className="flex flex-wrap gap-4">
                                 {node.children?.map((child: Evolution) => (
-                                    <div key={child.name} className="flex flex-col items-center">
+                                    <div
+                                        key={child.name}
+                                        className="flex basis-37 sm:basis-37 md:basis-40 flex-shrink flex-grow flex-col items-center min-w-0 max-w-xs"
+                                    >
                                         <EvolutionBranch node={{ ...child, children: [] }} currentName={currentName} />
                                         {getTriggerText(child) && (
                                             <span className="text-sm text-foreground mt-2">{getTriggerText(child).replace("-", " ")}</span>
@@ -433,12 +435,11 @@ export default async function Page({params}: PageProps) {
     return (
         <div className="container mx-auto px-4 py-8">
             
-            <div className="text-center">
             <h1 className="text-4xl md:text-5xl text-left px-4 font-bold capitalize mb-3">{pokemonDetails.name}</h1>
                 
-                <div className="flex gap-12 flex-wrap mt-8">
+                <div className="flex flex-col lg:flex-row gap-12 mt-8">
 
-                    <aside className="max-w-120 flex-1 relative">
+                    <aside className="max-w-full min-w-80 lg:min-w-100 xl:min-w-110 xxl:min-w-120 relative flex flex-col">
 
                         <PokemonPageClient 
                             pokemonObject={pokemonObject}
@@ -450,18 +451,18 @@ export default async function Page({params}: PageProps) {
                             
                    
                         {pokemonDetails.stats && 
-                            <div className="w-full">
+                            <div className="w-full pl-4 xl:pl-7">
                                 <p className="font-bold text-xl text-left mb-4">Base Stats</p>
-                                <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-2 w-full">
                                     <PokemonStats stats={pokemonDetails.stats} />
                                 </div>
                             </div>
                         }
                     </aside>
-                    <main className="flex-1">
+                    <main className="flex-1 min-w-0">
                         {flavorText && (
-                            <div className={`items-start text-left  flex gap-4 pb-4`}>
-                                <div className="flex-1 font-medium text-[1.2rem] pl-7">
+                            <div className={`items-end text-left flex gap-4 pb-4`}>
+                                <div className="flex-1 font-medium text-base lg:text-[1.2rem] pl-4 xl:pl-7">
                                     {flavorText.replace(/[\f\n\r]+/g, " ")}
                                 </div>
                                 {pokemonObject.sprites.front_default && (
@@ -470,22 +471,22 @@ export default async function Page({params}: PageProps) {
                                         alt={`${pokemonDetails.name} sprite`}
                                         width={128} 
                                         height={128}
-                                        className="flex-shrink-0 image-rendering-pixelated trim-whitespace" 
+                                        className="flex-shrink-0 w-[64] h-[64] image-rendering-pixelated lg:trim-whitespace" 
                                     />
                                 )}
                             </div>
                         )}
-                        <div className="grid grid-cols-1 md:grid-cols-2 border-3 border-input gap-4 mb-8 bg-muted p-7 rounded-4xl">
+                        <div className="grid grid-cols-1 md:grid-cols-2 border-3 max-w-500 border-input gap-4 mb-8 bg-muted p-4 px-6 xl:p-7 rounded-4xl">
                             <div className="">
-                                <p className="font-bold text-2xl mb-2 text-left">Height</p>
+                                <p className="font-bold text-lg lg:text-2xl mb-2 text-left">Height</p>
                                 <p className="text-left text-xl">{pokemonDetails.height}</p>
                             </div>
                             <div className="">
-                                <p className="font-bold text-2xl mb-2 text-left">Weight</p>
+                                <p className="font-bold text-lg lg:text-2xl mb-2 text-left">Weight</p>
                                 <p className="text-left text-xl">{pokemonDetails.weight}</p>
                             </div>
                             <div className="">
-                                <p className="font-bold text-2xl mb-3 text-left">Type</p>
+                                <p className="font-bold text-lg lg:text-2xl mb-3 text-left">Type</p>
                                 <div className="flex flex-wrap gap-2 items-center">
                                     {pokemonObject.types.map((t: { type: { name: string } }) => (
                                         <Types asLink={true} key={t.type.name} type={t.type.name} />
@@ -553,7 +554,6 @@ export default async function Page({params}: PageProps) {
                         )}
                     </main>
                 </div>
-            </div>
         </div>
     );
 }

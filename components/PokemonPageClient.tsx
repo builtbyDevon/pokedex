@@ -22,10 +22,28 @@ import DarkParticles from "@/components/particles/DarkParticles";
 import GhostParticles from "@/components/particles/GhostParticles";
 import SteelParticles from "@/components/particles/SteelParticles";
 
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
+interface PokemonDetails {
+  name: string;
+  image: string;
+  cries: {
+    latest: string;
+  };
+}
+
+interface PokemonObject {
+  types: PokemonType[];
+}
+
 interface PokemonPageClientProps {
-  pokemonObject: any;
-  pokemonDetails: any;
-  gradientStyle: any;
+  pokemonObject: PokemonObject;
+  pokemonDetails: PokemonDetails;
+  gradientStyle: React.CSSProperties;
 }
 
 export default function PokemonPageClient({ pokemonObject, pokemonDetails, gradientStyle }: PokemonPageClientProps) {
@@ -53,55 +71,55 @@ export default function PokemonPageClient({ pokemonObject, pokemonDetails, gradi
       {/* Particle Effects - only render when animations are enabled */}
       {animationsEnabled && (
         <>
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'fire') && (
+          {pokemonObject.types.some((t) => t.type.name === 'fire') && (
             <FireParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'flying') && (
+          {pokemonObject.types.some((t) => t.type.name === 'flying') && (
             <FlyingParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'water') && (
+          {pokemonObject.types.some((t) => t.type.name === 'water') && (
             <WaterParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'poison') && (
+          {pokemonObject.types.some((t) => t.type.name === 'poison') && (
             <PoisonParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'grass') && (
+          {pokemonObject.types.some((t) => t.type.name === 'grass') && (
             <GrassParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'bug') && (
+          {pokemonObject.types.some((t) => t.type.name === 'bug') && (
             <BugParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'ice') && (
+          {pokemonObject.types.some((t) => t.type.name === 'ice') && (
             <IceParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'fighting') && (
+          {pokemonObject.types.some((t) => t.type.name === 'fighting') && (
             <FightingParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'electric') && (
+          {pokemonObject.types.some((t) => t.type.name === 'electric') && (
             <ElectricParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'fairy') && (
+          {pokemonObject.types.some((t) => t.type.name === 'fairy') && (
             <FairyParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'psychic') && (
+          {pokemonObject.types.some((t) => t.type.name === 'psychic') && (
             <PsychicParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'rock') && (
+          {pokemonObject.types.some((t) => t.type.name === 'rock') && (
             <RockParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'ground') && (
+          {pokemonObject.types.some((t) => t.type.name === 'ground') && (
             <GroundParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'dragon') && (
+          {pokemonObject.types.some((t) => t.type.name === 'dragon') && (
             <DragonParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'dark') && (
+          {pokemonObject.types.some((t) => t.type.name === 'dark') && (
             <DarkParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'ghost') && (
+          {pokemonObject.types.some((t) => t.type.name === 'ghost') && (
             <GhostParticles />
           )}
-          {pokemonObject.types.some((t: { type: { name: string } }) => t.type.name === 'steel') && (
+          {pokemonObject.types.some((t) => t.type.name === 'steel') && (
             <SteelParticles />
           )}
         </>

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/Header";
 import Image from "next/image";
 import "./globals.css";
+import Link from "next/link";
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
@@ -31,9 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${pressStart2P.variable}`}>
+    <html  lang="en" suppressHydrationWarning className={`min-h-screen flex ${montserrat.variable} ${pressStart2P.variable}`}>
       <head />
-      <body className={`${montserrat.className} overflow-x-hidden`}>
+      <body className={`w-full ${montserrat.className} overflow-x-hidden flex flex-col min-h-screen`}>
         <NextTopLoader color="var(--red)" showSpinner={false} />
         <ThemeProvider
             attribute="class"
@@ -42,10 +43,11 @@ export default function RootLayout({
             disableTransitionOnChange
           >
           <Header />
-          <div className="mt-45 relative">
+          <main className="flex-1 pt-30 lg:pt-45 relative">
             <Image className="fixed rotate-[30deg] -z-50 opacity-5 dark:opacity-10 right-0 -top-50 grayscale" src="/pokedex.svg" alt="dex-bg" width={1200} height={30} />
             {children}
-          </div>
+          </main>
+          <footer className="text-center text-foreground py-5 px-4 text-[.8rem]">Built with love by <Link className="font-bold" href="https://devonw.me/" target="_blank">Devon Welch</Link> | Data from <Link className="font-bold text-[var(--red)]" target="_blank" href="https://pokeapi.co/">PokiApi</Link> | Images belong to Pokemon Inc.</footer>
         </ThemeProvider>
       </body>
     </html>

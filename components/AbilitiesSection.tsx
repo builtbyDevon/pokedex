@@ -66,7 +66,7 @@ export default function AbilitiesSection({ abilities }: AbilitiesSectionProps) {
   return (
     <>
       <div>
-        <p className="font-bold text-2xl mb-3 text-left">Abilities</p>
+        <p className="font-bold text-lg lg:text-2xl mb-3 text-left">Abilities</p>
         <div className="flex flex-wrap gap-2 mt-2">
           {abilities.map((ability, index) => (
             <button
