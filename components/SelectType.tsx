@@ -39,7 +39,7 @@ const types = [
 export default function SelectType(type: SelectTypeProps) {
   const router = useRouter();
   return (
-    <div className="container px-4 mx-auto">
+    <div className="container px-4 mx-auto mt-5">
       <label htmlFor="type-select" className="inline-block font-bold mb-2">
         Filter:
       </label>
