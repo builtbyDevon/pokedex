@@ -24,7 +24,7 @@ export default function PokemonSearch(isScrolled: isScrolled) {
     const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState(true);
     const [loadingSprites, setLoadingSprites] = useState<Set<string>>(new Set());
-    const { theme } = useTheme();
+    const { resolvedTheme } = useTheme();
 
     // Fetch all Pokemon once on component mount
     useEffect(() => {
@@ -131,11 +131,11 @@ export default function PokemonSearch(isScrolled: isScrolled) {
                 <Image 
                     className="pointer-events-none absolute right-5 z-5 top-1/2 -translate-y-1/2" 
                     alt="search-icon" 
-                    src={theme === 'dark' ? "/search-icon-dark.svg" : "/search-icon.svg"} 
+                    src={resolvedTheme === 'dark' ? "/search-icon-dark.svg" : "/search-icon.svg"} 
                     width={30} 
                     height={30} 
                 />
-                <svg className="absolute pointer-events-none w-[2rem] md:w-[3rem] right-[.45rem] -bottom-[0.2rem] md:right-[.45rem] md:bottom-[.2rem]" width="57" height="44" viewBox="0 0 57 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className={`${isScrolled.isScrolled && '!w-[2rem] !md:w-[2rem] !-bottom-[.3rem]'} ${`absolute pointer-events-none w-[2rem] md:w-[3rem] right-[.45rem] -bottom-[0.2rem] md:right-[.45rem] md:bottom-[.2rem]`}`} width="57" height="44" viewBox="0 0 57 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 44C0 44 48.5 39 49.5 0C52 2.5 61 13.5 53.5 29C45.8084 44.8959 30.5 44 0 44Z" fill="var(--muted)"/>
                 </svg>
 

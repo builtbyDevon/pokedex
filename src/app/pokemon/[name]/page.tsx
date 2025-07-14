@@ -83,6 +83,29 @@ export default async function Page({params}: PageProps) {
 
     const { name } = await params; // 🔑 unwrap the promise
 
+    // Get next and previous Pokemon
+    async function getNavigationPokemon(currentName: string) {
+        try {
+            const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1302");
+            const data = await res.json();
+            const pokemonList = data.results;
+            
+            const currentIndex = pokemonList.findIndex((pokemon: { name: string }) => pokemon.name === currentName);
+            
+            if (currentIndex === -1) {
+                return { previous: null, next: null };
+            }
+            
+            const previous = currentIndex > 0 ? pokemonList[currentIndex - 1] : null;
+            const next = currentIndex < pokemonList.length - 1 ? pokemonList[currentIndex + 1] : null;
+            
+            return { previous, next };
+        } catch (error) {
+            console.error('Failed to fetch navigation Pokemon:', error);
+            return { previous: null, next: null };
+        }
+    }
+
     function convertHeight(dm: number): string {
         const inchesTotal = dm * 3.937; // 1 dm = 3.937 inches
         const feet = Math.floor(inchesTotal / 12);
@@ -298,6 +321,7 @@ export default async function Page({params}: PageProps) {
 
     const { evolutions: pokemonEvolutions, flavorText } = await getPokemonEvolutions(name);
     const pokemonObject = await getPokemonDetails(name);
+    const { previous, next } = await getNavigationPokemon(name);
 
     // Get gradient configuration for the Pokemon's types
     const primaryConfig = getPokemonTypeConfig(pokemonObject.types[0].type.name);
@@ -435,9 +459,28 @@ export default async function Page({params}: PageProps) {
     return (
         <div className="container mx-auto px-4 py-8">
             
+            {/* Navigation Buttons */}
+            <div className="flex justify-between items-center px-4 mb-6 md:mb-12">
+                {previous ? (
+                    <Link href={`/pokemon/${previous.name}`} className="flex items-center gap-2 px-4 md:px-6 py-2 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-gray-800 dark:text-white font-bold md:text-xl rounded-full transition-colors duration-200 capitalize">
+                        ← {previous.name.replace("-", " ")}
+                    </Link>
+                ) : (
+                    <div></div>
+                )}
+                
+                {next ? (
+                    <Link href={`/pokemon/${next.name}`} className="flex items-center gap-2 px-4 md:px-6 py-2 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-gray-800 dark:text-white font-bold md:text-xl rounded-full transition-colors duration-200 capitalize">
+                        {next.name.replace("-", " ")} →
+                    </Link>
+                ) : (
+                    <div></div>
+                )}
+            </div>
+            
             <h1 className="text-4xl md:text-5xl text-left px-4 font-bold capitalize mb-3">{pokemonDetails.name}</h1>
                 
-                <div className="flex flex-col lg:flex-row gap-12 mt-8">
+                <div className="flex flex-col lg:flex-row gap-12 mt-5 md:mt-8">
 
                     <aside className="max-w-full min-w-80 lg:min-w-100 xl:min-w-110 xxl:min-w-120 relative flex flex-col">
 
@@ -553,6 +596,20 @@ export default async function Page({params}: PageProps) {
                             </div>
                         )}
                     </main>
+                </div>
+                
+                {/* View More Pokemon Button */}
+                <div className="flex justify-center mt-12 mb-8">
+                    <Link href="/" className="flex items-center gap-3 px-6 py-3 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-gray-800 dark:text-white font-bold rounded-full transition-colors duration-200 ">
+                        <Image 
+                            src="/pokeball.svg" 
+                            alt="Pokeball" 
+                            width={24} 
+                            height={24}
+                            className="w-6 h-6"
+                        />
+                        View More Pokemon!
+                    </Link>
                 </div>
         </div>
     );

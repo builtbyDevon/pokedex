@@ -43,8 +43,15 @@ export default function RootLayout({
             disableTransitionOnChange
           >
           <Header />
-          <main className="flex-1 pt-30 lg:pt-45 relative">
-            <Image className="fixed rotate-[30deg] -z-50 opacity-5 dark:opacity-10 right-0 -top-50 grayscale" src="/pokedex.svg" alt="dex-bg" width={1200} height={30} />
+          <main className="flex-1 pt-25 lg:pt-32 relative">
+            <Image 
+              className="fixed rotate-[30deg] -z-50 opacity-5 dark:opacity-10 right-0 -top-50 grayscale will-change-transform" 
+              src="/pokedex.svg" 
+              alt="dex-bg" 
+              width={1200} 
+              height={30}
+              priority
+            />
             {children}
           </main>
           <footer className="text-center text-foreground py-5 px-4 text-[.8rem]">Built with love by <Link className="font-bold" href="https://devonw.me/" target="_blank">Devon Welch</Link> | Data from <Link className="font-bold text-[var(--red)]" target="_blank" href="https://pokeapi.co/">PokiApi</Link> | Images belong to Pokemon Inc.</footer>
