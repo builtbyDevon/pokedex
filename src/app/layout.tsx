@@ -54,7 +54,7 @@ export default function RootLayout({
             />
             {children}
           </main>
-          <footer className="text-center text-foreground py-5 px-4 text-[.8rem]">Built with love by <Link className="font-bold" href="https://devonw.me/" target="_blank">Devon Welch</Link> | Data from <Link className="font-bold text-[var(--red)]" target="_blank" href="https://pokeapi.co/">PokiApi</Link> | Images belong to Pokemon Inc.</footer>
+          <footer className="text-center text-foreground py-5 px-4 text-[.8rem]">Built with love by <Link className="font-bold" href="https://devonw.me/" target="_blank">Devon Welch</Link> | Data from <Link className="font-bold text-[var(--red)]" target="_blank" href="https://pokeapi.co/">PokeApi</Link> | Images belong to Pokemon Inc.</footer>
         </ThemeProvider>
       </body>
     </html>
