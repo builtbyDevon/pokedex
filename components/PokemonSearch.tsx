@@ -177,6 +177,7 @@ export default function PokemonSearch(isScrolled: isScrolled) {
                                                     src={pokemon.sprite}
                                                     alt={pokemon.name}
                                                     width={48}
+                                                    unoptimized
                                                     height={48}
                                                     className="rounded"
                                                 />
