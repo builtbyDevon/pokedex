@@ -401,7 +401,7 @@ export default async function Page({params}: PageProps) {
                             node.name === currentName.toLowerCase() ? "bg-highlight border-3 border-[var(--red)] text-white" : "bg-background border-3 border-input hover:bg-accent hover:text-accent-foreground"
                         }`}>
                             {node.image ? (
-                                <Image alt={node.name} width={256} height={256} src={node.image} />
+                                <Image unoptimized alt={node.name} width={256} height={256} src={node.image} />
                             ) : (
                                 <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center">
                                     <span className="text-gray-500">?</span>
@@ -510,6 +510,7 @@ export default async function Page({params}: PageProps) {
                                 </div>
                                 {pokemonObject.sprites.front_default && (
                                     <Image 
+                                        unoptimized
                                         src={pokemonObject.sprites.front_default} 
                                         alt={`${pokemonDetails.name} sprite`}
                                         width={128} 
@@ -602,6 +603,7 @@ export default async function Page({params}: PageProps) {
                 <div className="flex justify-center mt-12 mb-8">
                     <Link href="/" className="flex items-center gap-3 px-6 py-3 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-gray-800 dark:text-white font-bold rounded-full transition-colors duration-200 ">
                         <Image 
+                            unoptimized
                             src="/pokeball.svg" 
                             alt="Pokeball" 
                             width={24} 

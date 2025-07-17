@@ -63,7 +63,7 @@ export default async function Pokemon(props: PokemonProps) {
             <div className="relative">
                 <div className="bg-background absolute rounded-4xl w-full h-full -z-50"></div>
                 {miniImage && (
-                    <Image className="absolute bg-background/50 backdrop-blur-md transition-all z-100 flex w-[50px] h-[50px] group-hover:w-[75px] group-hover:h-[75px] items-center justify-center p-[2px] shadow-lg right-3 top-3 rounded-full" src={miniImage} width="75" height="75" alt={`${name}-sprite`} />
+                    <Image unoptimized className="absolute bg-background/50 backdrop-blur-md transition-all z-100 flex w-[50px] h-[50px] group-hover:w-[75px] group-hover:h-[75px] items-center justify-center p-[2px] shadow-lg right-3 top-3 rounded-full" src={miniImage} width="75" height="75" alt={`${name}-sprite`} />
                 )}
 
                 <div className="absolute group-hover:opacity-100  group-hover:transform(scale(2)) opacity-0 -z-1 rounded-4xl h-full w-full" style={{
@@ -86,7 +86,7 @@ export default async function Pokemon(props: PokemonProps) {
                         style={gradientStyleHover} 
                         className="rounded-4xl group-hover:opacity-100 opacity-0 z-70 absolute w-full h-full bg-background group-hover:transition-opacity group-hover:duration-300"
                         > </div>
-                    {image !== null ? <Image className="relative z-80" quality="100" width="256" height="256" src={image} alt={name} /> : <div className="flex items-center justify-center opacity-50 w-[258px] h-[258px]">No image found</div>}
+                    {image !== null ? <Image unoptimized className="relative z-80" quality="100" width="256" height="256" src={image} alt={name} /> : <div className="flex items-center justify-center opacity-50 w-[258px] h-[258px]">No image found</div>}
                 </div>
         </div>
       

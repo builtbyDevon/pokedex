@@ -61,7 +61,7 @@ export default function PokemonStats(stats: Stats) {
                     content={<p className="capitalize">{stat.stat.name.replace("-", " ")}: <strong>{stat.base_stat}</strong></p>}
                 >
                     <div className="mb-2 group flex items-center gap-3 justify-center mb-4 max-w-100">
-                        <span className="capitalize flex items-center shrink-0 min-w-30 text-left font-bold gap-3"><Image alt={stat.stat.name} width={30} height={30} src={`/stats/`+stat.stat.name+".svg"} />{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
+                        <span className="capitalize flex items-center shrink-0 min-w-30 text-left font-bold gap-3"><Image unoptimized alt={stat.stat.name} width={30} height={30} src={`/stats/`+stat.stat.name+".svg"} />{stat.stat.name === "special-attack" ? "Sp. Attk" : stat.stat.name === "special-defense" ? "Sp. Def" : stat.stat.name}</span>
                         <div className="relative w-full h-2 rounded-lg bg-muted mt-1 mb-1">
                             <div
                                 className="w-full group-hover:opacity-80 group-hover:duration-[200ms] transition-all duration-[2000ms] h-2 rounded-lg w-0"

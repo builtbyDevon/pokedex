@@ -129,6 +129,7 @@ export default function PokemonSearch(isScrolled: isScrolled) {
                 <div className={`${isScrolled.isScrolled && `!hidden`} ${`w-1 h-1 absolute -top-3 right-[33%] rounded-full bg-foreground`}`}></div>
                 <div className={`${isScrolled.isScrolled && `!hidden`} ${`w-3 h-3 absolute -bottom-5 right-[20%] rounded-full bg-[var(--red)]`}`}></div>
                 <Image 
+                    unoptimized
                     className="pointer-events-none absolute right-5 z-5 top-1/2 -translate-y-1/2" 
                     alt="search-icon" 
                     src={resolvedTheme === 'dark' ? "/search-icon-dark.svg" : "/search-icon.svg"} 
