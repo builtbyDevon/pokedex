@@ -136,6 +136,7 @@ export default function PokemonPageClient({ pokemonObject, pokemonDetails, gradi
               height={256} 
               quality={100} 
               src={pokemonDetails.image}
+              unoptimized
               className="object-contain max-w-full max-h-full"
             />
           </div>
